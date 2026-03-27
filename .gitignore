@@ -6,3 +6,8 @@ __pycache__/
 *.log
 .env
 .ipynb_checkpoints/
+
+# environment
+.venv/
+language_guided_robotics.egg-info/
+uv.lock

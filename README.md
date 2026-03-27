@@ -15,5 +15,32 @@ Train a robot in simulation to understand commands like:
 - "move the cube to the table"
 - "stack the blue object on the green one"
 
+# Envrionment Setup
+
+- Create virtual environment
+```sh
+uv venv
+```
+
+- Activate the environment
+```sh
+source .venv/bin/activate
+```
+
+- Install the requirements
+```sh
+uv pip install -e .
+```
+
+- Add a package
+```sh
+uv add <package>
+```
+
+- Sync your environment
+```sh
+uv sync
+```
+
 ## Team
 SOAI Labs 2026 Project

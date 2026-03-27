@@ -1,0 +1,19 @@
+[project]
+name = "language-guided-robotics"
+version = "0.1.0"
+description = "We’re building a system that lets a simulated robot arm understand and act on natural language instructions, combining NLP, Computer Vision, and Reinforcement Learning from scratch."
+readme = "README.md"
+requires-python = ">=3.10"
+
+dependencies = [
+    "matplotlib>=3.10.8",
+    "numpy>=2.2.6",
+    "pybullet>=3.2.7",
+]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["env"]
