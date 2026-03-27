@@ -6,9 +6,10 @@ readme = "README.md"
 requires-python = ">=3.10"
 
 dependencies = [
-    "matplotlib>=3.10.8",
     "numpy>=2.2.6",
+    "matplotlib>=3.10.8",
     "pybullet>=3.2.7",
+    "gymnasium>=1.0.0",
 ]
 
 [build-system]
