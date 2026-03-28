@@ -8,15 +8,6 @@ pip install sentence-transformers scikit-learn matplotlib seaborn pandas numpy
 jupyter notebook notebook.ipynb
 ```
 
-## Inputs / Outputs
-
-- Input: hardcoded instruction dataset (100 sentences, 5 action types)
-- Output:
-  - `instructions_elbatoul.csv` — instruction + action type
-  - `embeddings_elbatoul.npy` — (100, 384) embedding matrix
-  - `tsne_elbatoul.png` — t-SNE visualization
-  - `pca_elbatoul.png` — PCA visualization
-
 ## Status
 
 [in progress]
