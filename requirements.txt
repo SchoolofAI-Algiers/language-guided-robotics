@@ -1,0 +1,7 @@
+gymnasium
+numpy
+pybullet
+torch
+torchvision
+opencv-python
+matplotlib
