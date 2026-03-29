@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 
 from env.src.environment import KukaEnv
 from env.src.config import RENDER_WIDTH, RENDER_HEIGHT, MAX_EPISODE_STEPS, RENDER_FPS, RenderMode
-
 def random_policy(obs, step):
     return np.random.uniform(-1.0, 1.0, size=7).astype(np.float32)
 

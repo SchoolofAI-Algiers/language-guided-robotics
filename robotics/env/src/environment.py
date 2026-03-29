@@ -5,9 +5,16 @@ import pybullet as p
 import pybullet_data
 
 from env.src.config import GraphicalMode, NUM_JOINTS, END_EFFECTOR_LINK_INDEX, MAX_FORCE, SIM_TIMESTEP, SIM_STEPS_PER_ACTION, MAX_EPISODE_STEPS, JOINT_LOWER_LIMITS, JOINT_UPPER_LIMITS, HOME_POSITION, MAX_JOINT_VELOCITY, WORKSPACE_LOW, WORKSPACE_HIGH, CAM_DISTANCE, CAM_YAW, CAM_PITCH, CAM_TARGET, RENDER_WIDTH, RENDER_HEIGHT, RENDER_FPS, RenderMode
+from env.src.config import NUM_OBJECTS, OBJECT_COLORS, OBJECT_SIZE_MIN, OBJECT_SIZE_MAX,TABLE_POSITION, TABLE_HALF_EXTENTS, TABLE_SURFACE_Z, SPAWN_RANGE
+
 
 class KukaEnv(gym.Env):
     """Gymnasium-compatible environment for the Kuka IIWA 7-DOF robot arm.
+
+     Phase 2 additions:
+    - Multi-object scene (3 colored blocks, randomized on every reset)
+    - Object state exposed via info["object_state"]:
+        {obj_id: {"pos": [x, y, z], "color": str}}
 
     Action:      7-dim joint position targets (clipped to joint limits)
     Observation:  21-dim vector = [joint_pos(7), joint_vel(7),
@@ -49,6 +56,100 @@ class KukaEnv(gym.Env):
         self._plane_id = None
         self._step_count = 0
 
+        # object tracking 
+        self._object_ids = []      # list of PyBullet object IDs
+        self._object_colors = []   # list of color name strings
+
+    # private helpers
+
+    def _load_table(self):
+        """Load a static table in front of the robot."""
+        col = p.createCollisionShape(
+            p.GEOM_BOX,
+            halfExtents=TABLE_HALF_EXTENTS,
+            physicsClientId=self._physics_client_id,
+        )
+        vis = p.createVisualShape(
+            p.GEOM_BOX,
+            halfExtents=TABLE_HALF_EXTENTS,
+            rgbaColor=[0.6, 0.4, 0.2, 1.0],
+            physicsClientId=self._physics_client_id,
+        )
+        p.createMultiBody(
+            baseMass=0,  # static — won't move
+            baseCollisionShapeIndex=col,
+            baseVisualShapeIndex=vis,
+            basePosition=TABLE_POSITION,
+            physicsClientId=self._physics_client_id,
+        )
+
+    def _load_objects(self):
+        self._object_ids = []
+        self._object_colors = []
+
+        color_names = list(OBJECT_COLORS.keys())
+        table_cx, table_cy = TABLE_POSITION[0], TABLE_POSITION[1]
+        
+        MIN_DISTANCE = 0.10  # objects must be at least 10cm apart
+        placed_positions = []  
+
+        for i in range(NUM_OBJECTS):
+            size = float(self.np_random.uniform(OBJECT_SIZE_MIN, OBJECT_SIZE_MAX))
+            half = [size, size, size]
+            color_name = color_names[i % len(color_names)]
+            rgba = OBJECT_COLORS[color_name]
+
+            max_attempts = 50
+            for attempt in range(max_attempts):
+                ox = float(self.np_random.uniform(-SPAWN_RANGE, SPAWN_RANGE))
+                oy = float(self.np_random.uniform(-SPAWN_RANGE, SPAWN_RANGE))
+                candidate = [table_cx + ox, table_cy + oy]
+
+                # Check distance from all already placed objects
+                too_close = any(
+                    np.sqrt((candidate[0] - p[0])**2 + (candidate[1] - p[1])**2) < MIN_DISTANCE
+                    for p in placed_positions
+                )
+                if not too_close:
+                    break  
+            
+            position = [candidate[0], candidate[1], TABLE_SURFACE_Z]
+            placed_positions.append(candidate)
+
+            col = p.createCollisionShape(
+                p.GEOM_BOX, halfExtents=half,
+                physicsClientId=self._physics_client_id,
+            )
+            vis = p.createVisualShape(
+                p.GEOM_BOX, halfExtents=half, rgbaColor=rgba,
+                physicsClientId=self._physics_client_id,
+            )
+            obj_id = p.createMultiBody(
+                baseMass=0.1,
+                baseCollisionShapeIndex=col,
+                baseVisualShapeIndex=vis,
+                basePosition=position,
+                physicsClientId=self._physics_client_id,
+            )
+            self._object_ids.append(obj_id)
+            self._object_colors.append(color_name)
+
+    def _get_object_state(self):
+        """
+        Returns the object state dict the Vision team needs:
+            {obj_id: {"pos": [x, y, z], "color": str}}
+        """
+        state = {}
+        for obj_id, color in zip(self._object_ids, self._object_colors):
+            pos, _ = p.getBasePositionAndOrientation(
+                obj_id, physicsClientId=self._physics_client_id
+            )
+            state[obj_id] = {
+                "pos": list(pos),
+                "color": color,
+            }
+        return state
+
     def reset(self, *, seed=None, options=None):
         super().reset(seed=seed)
 
@@ -82,13 +183,23 @@ class KukaEnv(gym.Env):
                 HOME_POSITION[i],
                 physicsClientId=self._physics_client_id,
             )
+        
+        #load table and objects 
+        self._load_table()
+        self._load_objects()
 
         self._step_count = 0
 
         for _ in range(SIM_STEPS_PER_ACTION):
             p.stepSimulation(physicsClientId=self._physics_client_id)
 
-        return self._get_observation(), {}
+        obs = self._get_observation()
+        info = {
+            "step_count": self._step_count,
+            "ee_position": obs[14:17].tolist(),
+            "object_state": self._get_object_state(),  
+        }
+        return obs, info
 
     def step(self, action):
         # Scale normalized [-1, 1] action to joint position limits
@@ -119,6 +230,7 @@ class KukaEnv(gym.Env):
         info = {
             "step_count": self._step_count,
             "ee_position": observation[14:17].tolist(),
+            "object_state": self._get_object_state(), 
         }
 
         return observation, reward, terminated, truncated, info
