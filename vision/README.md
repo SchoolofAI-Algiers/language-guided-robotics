@@ -189,30 +189,40 @@ obs = torch.cat([feats_visual[obj_id], feats_state[obj_id]])  # Shape: (521,)
 
 ## Phase 2: Gymnasium Integration & Observation Tensors
 
-In **Phase 2**, our primary goal was to take the standalone visual feature extractors built in Phase 1 and seamlessly wire them directly into the Reinforcement Learning loop (the `Gymnasium` environment). 
+In **Phase 2**, our primary goal was to take the standalone visual feature extractors built in Phase 1 and seamlessly wire them directly into the Reinforcement Learning loop (the `Gymnasium` environment).
 
 Here is exactly what we achieved in Phase 2:
 
 ### 1. The Vision-to-Environment Bridge
-We integrated the `resnet_features` pipeline right into the core Gymnasium environment (`KukaEnv` in `robotics/env/src/environment.py`). 
-* Now, the vision model natively listens to the PyBullet physics engine loop. 
-* On every single `env.step()` and `env.reset()`, the environment automatically renders the camera image, passes it through the ResNet18 CNN, normalizes the features, and tightly packages them into the observation array ready for the agent to use.
+
+We integrated the `resnet_features` pipeline right into the core Gymnasium environment (`KukaEnv` in `robotics/env/src/environment.py`).
+
+- Now, the vision model natively listens to the PyBullet physics engine loop.
+- On every single `env.step()` and `env.reset()`, the environment automatically renders the camera image, passes it through the ResNet18 CNN, normalizes the features, and tightly packages them into the observation array ready for the agent to use.
 
 ### 2. Observation Space Normalization (RL Handshake)
+
 Actor-Critic networks in RL (like PPO or SAC) can destabilize and "blow up" if the incoming observations are completely unscaled. To completely prevent this:
-* The raw 512-dimensional ResNet features are immediately passed through an **L2 Normalization**, definitively crushing their values into a safe `[-1.0, 1.0]` bound.
-* Physical robot joint positions and velocities were mapped to their real absolute limits.
-* Gymnasium's `observation_space` natively reads these bounds, meaning standard libraries (like *Stable-Baselines3*) can instantly build flawlessly scaled network policies upon instantiation.
+
+- The raw 512-dimensional ResNet features are immediately passed through an **L2 Normalization**, definitively crushing their values into a safe `[-1.0, 1.0]` bound.
+- Physical robot joint positions and velocities were mapped to their real absolute limits.
+- Gymnasium's `observation_space` natively reads these bounds, meaning standard libraries (like _Stable-Baselines3_) can instantly build flawlessly scaled network policies upon instantiation.
 
 ### 3. Comprehensive Ablation Modes
-To help the RL team research how the agent performs under different perceptual constraints, we built out specific toggles. You configure it just by passing an argument: `env = KukaEnv(obs_mode="...")`.
-* **`visual_state` (533-dim array):** Multimodal setup. Concatenates 512 CNN features with 21 internal physics joint values.
-* **`visual_only` (512-dim array):** Strips away all physics arrays. Forces the AI to solve tasks by relying purely on its camera.
-* **`pixels` (Gymnasium Dict):** Strips the ResNet entirely and passes a raw RGB camera matrix directly into the observation for purely pixel-based RL testing (e.g., *DreamerV3*).
-* **`state` (21-dim array):** The classic control setup. The agent acts entirely blind, using only its joint sensors.
+
+To help the RL team research how the agent performs under different perceptual constraints, we built out specific toggles allowing exact mixtures of Semantics (Visuals), Proprioception (Joints), and Ground Geometry (PyBullet Targets). You configure it just by passing an argument: `env = KukaEnv(obs_mode="...")`.
+
+- **`visual_joints_statepybullet` (542-dim array):** The full multimodal setup. Concatenates 512-dim CNN crop features (semantics) + 21-dim arm state (proprioception) + 9-dim object PyBullet state (ground-truth depth/position). Solves "3D from 2D" sample inefficiencies!
+- **`visual_joints` (533-dim array):** Concatenates 512 CNN features with 21 internal physics arm joint values.
+- **`visual_statepybullet` (521-dim array):** Concatenates 512 CNN features directly with target 9-dim object physics states (forces arm to guess its proprioception).
+- **`visual_only` (512-dim array):** Strips away all physics arrays. Forces the AI to solve tasks by relying purely on its camera.
+- **`pixels` (Gymnasium Dict):** Strips the ResNet entirely and passes a raw RGB camera matrix directly into the observation for purely pixel-based RL testing (e.g., _DreamerV3_).
+- **`state` (21-dim array):** The classic control setup. The agent acts entirely blind, using only its joint sensors.
 
 ### 4. Dummy Policy Verification
-To guarantee there will be absolutely zero crash-inducing shape errors when handed off to the RL researchers, Phase 2 deployed `test_dummy_policy.py`. 
-* It instantiates a mini `torch.nn.Sequential` multi-layer perceptron (MLP).
-* It routes our live multimodal observation tensors (the vision array + PyBullet outputs) deep into the PyTorch operations.
-* **Result:** It scientifically guarantees that dimensionalities stack correctly, and tensors flow endlessly through step transitions without throwing shape mismatch exceptions.
+
+To guarantee there will be absolutely zero crash-inducing shape errors when handed off to the RL researchers, Phase 2 deployed `test_dummy_policy.py`.
+
+- It instantiates a mini `torch.nn.Sequential` multi-layer perceptron (MLP).
+- It routes our live multimodal observation tensors (the vision array + PyBullet outputs) deep into the PyTorch operations.
+- **Result:** It scientifically guarantees that dimensionalities stack correctly, and tensors flow endlessly through step transitions without throwing shape mismatch exceptions.

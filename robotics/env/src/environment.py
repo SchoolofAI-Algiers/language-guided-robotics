@@ -22,13 +22,15 @@ class KukaEnv(gym.Env):
     Observation: Variable depending on `obs_mode`.
                  - 'state': 21-dim vector = [joint_pos(7), joint_vel(7), ee_position(3), ee_orientation(4)]
                  - 'visual_only': 512-dim CNN features
-                 - 'visual_state': 533-dim vector = 512-dim CNN features + 21-dim state
+                 - 'visual_joints': 533-dim vector = 512-dim CNN features + 21-dim state
+                 - 'visual_statepybullet': 521-dim vector = 512-dim CNN features + 9-dim pybullet object state
+                 - 'visual_joints_statepybullet': 542-dim vector = 512-dim CNN features + 21-dim state + 9-dim pybullet object state
                  - 'pixels': Image observation (H, W, 3) + 21-dim state (requires Dict space)
     """
 
     metadata = {"render_modes": ["human", "rgb_array"], "render_fps": RENDER_FPS}
 
-    def __init__(self, render_mode=RenderMode.RGB_ARRAY.value, obs_mode="visual_state"):
+    def __init__(self, render_mode=RenderMode.RGB_ARRAY.value, obs_mode="visual_joints_statepybullet"):
         super().__init__()
 
         assert render_mode is None or render_mode in self.metadata["render_modes"]
@@ -56,7 +58,14 @@ class KukaEnv(gym.Env):
             WORKSPACE_HIGH,
             np.full(4, 1.0, dtype=np.float32),
         ])
-        
+
+        # 9-dim pybullet object state bounds: [x,y,z, vx,vy,vz, roll,pitch,yaw]
+        obj_low = np.full(9, -10.0, dtype=np.float32)
+        obj_high = np.full(9, 10.0, dtype=np.float32)
+
+        feat_low = np.full(512, -1.0, dtype=np.float32)
+        feat_high = np.full(512, 1.0, dtype=np.float32)
+
         # Adjust the observation space based on the selected mode
         if self.obs_mode == "state":
             # Pure physics state (21 dimensions). Suitable for state-based RL baselines.
@@ -65,24 +74,32 @@ class KukaEnv(gym.Env):
             )
         elif self.obs_mode == "visual_only":
             # Only Visual features (512 dims)
-            feat_low = np.full(512, -1.0, dtype=np.float32)
-            feat_high = np.full(512, 1.0, dtype=np.float32)
             self.observation_space = spaces.Box(
                 low=feat_low, high=feat_high, shape=(512,), dtype=np.float32
             )
-        elif self.obs_mode == "visual_state" or self.obs_mode == "visual":
+        elif self.obs_mode == "visual_joints" or self.obs_mode == "visual_state" or self.obs_mode == "visual":
             # CNN Visual features (512 dims) concatenated with physics state (21 dims) -> 533 dims
-            # Features are L2 normalized in the vision_pipeline to guarantee compatibility 
-            # with standard RL inputs (prevents activation blowup in MLP feature extractors).
-            # Because of normalisation, visual feature bounds are guaranteed to be within [-1, 1].
-            feat_low = np.full(512, -1.0, dtype=np.float32)
-            feat_high = np.full(512, 1.0, dtype=np.float32)
-            
             obs_low = np.concatenate([feat_low, state_low])
             obs_high = np.concatenate([feat_high, state_high])
-            
+
             self.observation_space = spaces.Box(
                 low=obs_low, high=obs_high, shape=(533,), dtype=np.float32
+            )
+        elif self.obs_mode == "visual_statepybullet":
+            # CNN Visual features (512 dims) + PyBullet Target Object State (9 dims) -> 521 dims
+            obs_low = np.concatenate([feat_low, obj_low])
+            obs_high = np.concatenate([feat_high, obj_high])
+
+            self.observation_space = spaces.Box(
+                low=obs_low, high=obs_high, shape=(521,), dtype=np.float32
+            )
+        elif self.obs_mode == "visual_joints_statepybullet":
+            # CNN (512) + Arm State (21) + Object State (9) -> 542 dims
+            obs_low = np.concatenate([feat_low, state_low, obj_low])
+            obs_high = np.concatenate([feat_high, state_high, obj_high])
+
+            self.observation_space = spaces.Box(
+                low=obs_low, high=obs_high, shape=(542,), dtype=np.float32
             )
         elif self.obs_mode == "pixels":
             # Dictionary space containing raw normalized/unnormalized image pixels and physics state.
@@ -169,18 +186,20 @@ class KukaEnv(gym.Env):
         # Get true physics state to extract ee_position for the info dict
         if self.obs_mode == "pixels":
             ee_pos = observation["state"][14:17].tolist()
-        elif self.obs_mode == "visual_state" or self.obs_mode == "visual":
+        elif self.obs_mode == "visual_joints":
             ee_pos = observation[512+14:512+17].tolist()
-        elif self.obs_mode == "visual_only":
-            # For visual only, we don't have the state in the observation, 
-            # so we compute it dynamically or return a placeholder.
-            # Real position state starts at idx 14 of raw get_observation internals.
-            # But the 'observation' variable doesn't have it.
-            # We must re-extract the ee_pos from the system.
+        elif self.obs_mode == "visual_joints_statepybullet":
+            ee_pos = observation[512+14:512+17].tolist()
+        elif self.obs_mode == "visual_only" or self.obs_mode == "visual_statepybullet":
+            # For visual only or modes without arm state, we compute it dynamically
             ee_state = p.getLinkState(self._kuka_id, END_EFFECTOR_LINK_INDEX, physicsClientId=self._physics_client_id)
             ee_pos = list(ee_state[0])
-        else: # state
+        elif self.obs_mode == "state":
             ee_pos = observation[14:17].tolist()
+        else:
+            # Fallback
+            ee_state = p.getLinkState(self._kuka_id, END_EFFECTOR_LINK_INDEX, physicsClientId=self._physics_client_id)
+            ee_pos = list(ee_state[0])
             
         info = {
             "step_count": self._step_count,
@@ -243,39 +262,44 @@ class KukaEnv(gym.Env):
         
         physics_state = np.clip(physics_state, state_low, state_high)
 
+        # Mock Object State since we don't have objects yet:
+        # Ground truth [x, y, z, vx, vy, vz, roll, pitch, yaw]
+        # TODO: Replace this with real physics queries when target blocks are spawned
+        object_state = np.zeros(9, dtype=np.float32)
+
         # Determine the final observation based on the requested obs_mode
         if self.obs_mode == "state":
             # Return just the physics state
             return physics_state
-            
+
         elif self.obs_mode == "visual_only":
-            # 1. Render the current camera image
             img = self._get_camera_image()
-            
-            # 2. Extract visual features using the ResNet18 pipeline from vision
             import torch
             with torch.no_grad():
                 vision_tensor = resnet_features([img]).cpu().numpy()[0]
-                
-            # 3. Return only visual representation
             return vision_tensor
 
-        elif self.obs_mode == "visual_state" or self.obs_mode == "visual":
-            # 1. Render the current camera image
+        elif self.obs_mode == "visual_joints" or self.obs_mode == "visual_state" or self.obs_mode == "visual":
             img = self._get_camera_image()
-            
-            # 2. Extract visual features using the ResNet18 pipeline from vision
-            # `resnet_features` expects a list of crops, so we provide the whole frame as 1 crop
-            # It returns an L2-normalized tensor of shape (N, 512). We grab the first element and convert to numpy.
             import torch
             with torch.no_grad():
                 vision_tensor = resnet_features([img]).cpu().numpy()[0]
-                
-            # 3. Concatenate normalized visual representation and physics state
-            # Shape matches our Box definition: 512 + 21 = 533 dimensions
-            obs = np.concatenate([vision_tensor, physics_state])
-            return obs
-            
+            return np.concatenate([vision_tensor, physics_state])
+
+        elif self.obs_mode == "visual_statepybullet":
+            img = self._get_camera_image()
+            import torch
+            with torch.no_grad():
+                vision_tensor = resnet_features([img]).cpu().numpy()[0]
+            return np.concatenate([vision_tensor, object_state])
+
+        elif self.obs_mode == "visual_joints_statepybullet":
+            img = self._get_camera_image()
+            import torch
+            with torch.no_grad():
+                vision_tensor = resnet_features([img]).cpu().numpy()[0]
+            return np.concatenate([vision_tensor, physics_state, object_state])
+
         elif self.obs_mode == "pixels":
             # Return dictionary containing raw pixels and physics state
             img = self._get_camera_image()

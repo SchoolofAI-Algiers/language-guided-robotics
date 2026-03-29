@@ -84,7 +84,9 @@ def test_ablation_dummy_policy(obs_mode):
 
 if __name__ == "__main__":
     import gymnasium as gym
-    test_ablation_dummy_policy("visual_state")
+    test_ablation_dummy_policy("visual_joints")
+    test_ablation_dummy_policy("visual_statepybullet")
+    test_ablation_dummy_policy("visual_joints_statepybullet")
     test_ablation_dummy_policy("visual_only")
     test_ablation_dummy_policy("pixels")
     test_ablation_dummy_policy("state")
