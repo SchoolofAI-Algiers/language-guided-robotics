@@ -58,6 +58,7 @@ OBJECT_COLORS = {
     "blue":   [0.0, 0.0, 1.0, 1.0],
     "yellow": [1.0, 1.0, 0.0, 1.0],
 }
+OBJECT_SHAPES = ["box", "sphere", "cylinder"]
 
 OBJECT_SIZE_MIN = 0.02   
 OBJECT_SIZE_MAX = 0.05   
@@ -65,4 +66,4 @@ OBJECT_SIZE_MAX = 0.05
 TABLE_POSITION   = [0.5, 0.0, 0.2]   # in front of the robot
 TABLE_HALF_EXTENTS = [0.4, 0.4, 0.05]
 TABLE_SURFACE_Z  = 0.42              # z height of the table top
-SPAWN_RANGE      = 0.22             # objects spawn within ±10cm of table center
+SPAWN_RANGE      = 0.22             # objects spawn within ±22cm of table center

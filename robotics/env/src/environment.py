@@ -5,7 +5,7 @@ import pybullet as p
 import pybullet_data
 
 from env.src.config import GraphicalMode, NUM_JOINTS, END_EFFECTOR_LINK_INDEX, MAX_FORCE, SIM_TIMESTEP, SIM_STEPS_PER_ACTION, MAX_EPISODE_STEPS, JOINT_LOWER_LIMITS, JOINT_UPPER_LIMITS, HOME_POSITION, MAX_JOINT_VELOCITY, WORKSPACE_LOW, WORKSPACE_HIGH, CAM_DISTANCE, CAM_YAW, CAM_PITCH, CAM_TARGET, RENDER_WIDTH, RENDER_HEIGHT, RENDER_FPS, RenderMode
-from env.src.config import NUM_OBJECTS, OBJECT_COLORS, OBJECT_SIZE_MIN, OBJECT_SIZE_MAX,TABLE_POSITION, TABLE_HALF_EXTENTS, TABLE_SURFACE_Z, SPAWN_RANGE
+from env.src.config import NUM_OBJECTS, OBJECT_COLORS, OBJECT_SIZE_MIN, OBJECT_SIZE_MAX,TABLE_POSITION, TABLE_HALF_EXTENTS, TABLE_SURFACE_Z, SPAWN_RANGE , OBJECT_SHAPES
 
 
 class KukaEnv(gym.Env):
@@ -86,44 +86,78 @@ class KukaEnv(gym.Env):
     def _load_objects(self):
         self._object_ids = []
         self._object_colors = []
+        self._object_shapes = []
 
         color_names = list(OBJECT_COLORS.keys())
         table_cx, table_cy = TABLE_POSITION[0], TABLE_POSITION[1]
-        
-        MIN_DISTANCE = 0.10  # objects must be at least 10cm apart
-        placed_positions = []  
+        MIN_DISTANCE = 0.10
+        placed_positions = []
 
         for i in range(NUM_OBJECTS):
-            size = float(self.np_random.uniform(OBJECT_SIZE_MIN, OBJECT_SIZE_MAX))
-            half = [size, size, size]
+            size  = float(self.np_random.uniform(OBJECT_SIZE_MIN, OBJECT_SIZE_MAX))
             color_name = color_names[i % len(color_names)]
-            rgba = OBJECT_COLORS[color_name]
+            rgba  = OBJECT_COLORS[color_name]
 
-            max_attempts = 50
-            for attempt in range(max_attempts):
+            # pick a random shape for this object
+            shape_name = OBJECT_SHAPES[ int(self.np_random.integers(0, len(OBJECT_SHAPES))) ]
+
+            if shape_name == "box":
+                col = p.createCollisionShape(
+                    p.GEOM_BOX,
+                    halfExtents=[size, size, size],
+                    physicsClientId=self._physics_client_id,
+                )
+                vis = p.createVisualShape(
+                    p.GEOM_BOX,
+                    halfExtents=[size, size, size],
+                    rgbaColor=rgba,
+                    physicsClientId=self._physics_client_id,
+                )
+
+            elif shape_name == "sphere":
+                col = p.createCollisionShape(
+                    p.GEOM_SPHERE,
+                    radius=size,
+                    physicsClientId=self._physics_client_id,
+                )
+                vis = p.createVisualShape(
+                    p.GEOM_SPHERE,
+                    radius=size,
+                    rgbaColor=rgba,
+                    physicsClientId=self._physics_client_id,
+                )
+
+            elif shape_name == "cylinder":
+                col = p.createCollisionShape(
+                    p.GEOM_CYLINDER,
+                    radius=size,
+                    height=size * 2,
+                    physicsClientId=self._physics_client_id,
+                )
+                vis = p.createVisualShape(
+                    p.GEOM_CYLINDER,
+                    radius=size,
+                    length=size * 2,
+                    rgbaColor=rgba,
+                    physicsClientId=self._physics_client_id,
+                )
+
+        
+            # Find a valid position 
+            for _ in range(50):
                 ox = float(self.np_random.uniform(-SPAWN_RANGE, SPAWN_RANGE))
                 oy = float(self.np_random.uniform(-SPAWN_RANGE, SPAWN_RANGE))
                 candidate = [table_cx + ox, table_cy + oy]
-
-                # Check distance from all already placed objects
                 too_close = any(
-                    np.sqrt((candidate[0] - p[0])**2 + (candidate[1] - p[1])**2) < MIN_DISTANCE
-                    for p in placed_positions
+                    np.sqrt((candidate[0] - p_[0])**2 + (candidate[1] - p_[1])**2) < MIN_DISTANCE
+                    for p_ in placed_positions
                 )
                 if not too_close:
-                    break  
-            
+                    break
+
             position = [candidate[0], candidate[1], TABLE_SURFACE_Z]
             placed_positions.append(candidate)
 
-            col = p.createCollisionShape(
-                p.GEOM_BOX, halfExtents=half,
-                physicsClientId=self._physics_client_id,
-            )
-            vis = p.createVisualShape(
-                p.GEOM_BOX, halfExtents=half, rgbaColor=rgba,
-                physicsClientId=self._physics_client_id,
-            )
             obj_id = p.createMultiBody(
                 baseMass=0.1,
                 baseCollisionShapeIndex=col,
@@ -131,8 +165,10 @@ class KukaEnv(gym.Env):
                 basePosition=position,
                 physicsClientId=self._physics_client_id,
             )
+
             self._object_ids.append(obj_id)
             self._object_colors.append(color_name)
+            self._object_shapes.append(shape_name)
 
     def _get_object_state(self):
         """
@@ -140,13 +176,16 @@ class KukaEnv(gym.Env):
             {obj_id: {"pos": [x, y, z], "color": str}}
         """
         state = {}
-        for obj_id, color in zip(self._object_ids, self._object_colors):
+        for obj_id, color, shape in zip(
+            self._object_ids, self._object_colors, self._object_shapes
+        ):
             pos, _ = p.getBasePositionAndOrientation(
                 obj_id, physicsClientId=self._physics_client_id
             )
             state[obj_id] = {
-                "pos": list(pos),
+                "pos":   list(pos),
                 "color": color,
+                "shape": shape,      
             }
         return state
 
