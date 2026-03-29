@@ -35,7 +35,7 @@ pip install sentence-transformers scikit-learn matplotlib seaborn pandas numpy
 
 | Metric | Value | Target |
 |---|---|---|
-| Classifier accuracy | 89.6% | > 90% |
+| Classifier accuracy | 92.0% | > 90% |
 | Intra/Inter ratio | 1.31 | > 1.30 |
 | Inter-class similarity | 0.37 | < 0.45 |
 | Paraphrase pairs | 8/12 strict, 12/12 soft | > 0.85 |
