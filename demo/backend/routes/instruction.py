@@ -19,11 +19,12 @@ def run_instruction():
     instruction = data.get('instruction', '')
 
     obs = _env._get_observation()
+    physics_state = obs["state"]
 
-    joint_positions = obs[:7].tolist()
-    joint_velocities = obs[7:14].tolist()
-    ee_position = obs[14:17].tolist()
-    ee_orientation = obs[17:21].tolist()
+    joint_positions = physics_state[:7].tolist()
+    joint_velocities = physics_state[7:14].tolist()
+    ee_position = physics_state[14:17].tolist()
+    ee_orientation = physics_state[17:21].tolist()
 
     joint_angles_deg = [
         {"joint": i, "angle": round(np.degrees(joint_positions[i]), 2)}

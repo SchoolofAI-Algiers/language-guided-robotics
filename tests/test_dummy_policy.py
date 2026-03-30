@@ -5,10 +5,10 @@ import torch
 import torch.nn as nn
 
 # Add project root to path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../")))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from robotics.env.src.environment import KukaEnv
-from robotics.env.src.wrappers.multimodal_wrapper import MultimodalObservationWrapper
+from core.multimodal_wrapper import MultimodalObservationWrapper
 import gymnasium as gym
 
 class DummyPolicyNetwork(nn.Module):
@@ -85,7 +85,7 @@ def test_ablation_dummy_policy(obs_mode):
             print("[Test] Episode ended early.")
             break
             
-    print(f"[Test] SUCCESS: obs_mode='{obs_mode}' flows without shape errors ✅")
+    print(f"[Test] SUCCESS: obs_mode='{obs_mode}' flows without shape errors ")
     env.close()
 
 if __name__ == "__main__":
