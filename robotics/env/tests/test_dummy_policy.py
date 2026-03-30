@@ -8,12 +8,14 @@ import torch.nn as nn
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../")))
 
 from robotics.env.src.environment import KukaEnv
+from robotics.env.src.wrappers.multimodal_wrapper import MultimodalObservationWrapper
+import gymnasium as gym
 
 class DummyPolicyNetwork(nn.Module):
     """
     A bare minimum, lightweight PyTorch model representing an RL actor network.
     Verifies that the concatenated observation tensor mathematically matches
-    without throwing shape mismatch errors during a forward pass.
+    with the wrapper output without throwing shape mismatch errors.
     """
     def __init__(self, obs_dim, action_dim):
         super().__init__()
@@ -33,8 +35,12 @@ class DummyPolicyNetwork(nn.Module):
         return action_tensor.squeeze(0).detach().numpy()
 
 def test_ablation_dummy_policy(obs_mode):
-    print(f"\n[Test] Initializing KukaEnv with obs_mode='{obs_mode}'")
-    env = KukaEnv(render_mode="rgb_array", obs_mode=obs_mode)
+    print(f"\n[Test] Initializing wrapped KukaEnv with obs_mode='{obs_mode}'")
+    # 1) Base Environment (Yields pure Dict[pixels, state, object_state])
+    base_env = KukaEnv(render_mode="rgb_array")
+    
+    # 2) Wrap it using the new architecture!
+    env = MultimodalObservationWrapper(base_env, obs_mode=obs_mode)
     
     print("[Test] Calling env.reset()...")
     obs, info = env.reset()
@@ -83,7 +89,6 @@ def test_ablation_dummy_policy(obs_mode):
     env.close()
 
 if __name__ == "__main__":
-    import gymnasium as gym
     test_ablation_dummy_policy("visual_joints")
     test_ablation_dummy_policy("visual_statepybullet")
     test_ablation_dummy_policy("visual_joints_statepybullet")
