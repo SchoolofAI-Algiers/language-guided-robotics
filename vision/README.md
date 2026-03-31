@@ -63,13 +63,13 @@ To verify bounding boxes, raw ResNet capabilities, and semantic masks, you can r
 
 Execute the main controller script:
 
-`ash
+`bash
 # From the project root
 cd vision
 python main.py
 `
 
-No graphical display server is needed — Matplotlib's Agg headless backend is utilized dynamically so it seamlessly executes on SSH remote servers. Output runs are pushed directly to ision_output/.
+No graphical display server is needed — Matplotlib's Agg headless backend is utilized dynamically so it seamlessly executes on SSH remote servers. Output runs are pushed directly to vision_output/.
 
 ### The 5 Demo Scenes
 
