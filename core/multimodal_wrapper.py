@@ -65,6 +65,13 @@ class MultimodalObservationWrapper(gym.ObservationWrapper):
                 high=np.concatenate([feat_high, obj_high]),
                 dtype=np.float32
             )
+        elif self.obs_mode == "joints_statepybullet":
+            # 21 + 9 = 30
+            self.observation_space = spaces.Box(
+                low=np.concatenate([state_low, obj_low]),
+                high=np.concatenate([state_high, obj_high]),
+                dtype=np.float32
+            )
         elif self.obs_mode == "visual_joints_statepybullet":
             # 512 + 21 + 9 = 542
             self.observation_space = spaces.Box(
@@ -118,6 +125,9 @@ class MultimodalObservationWrapper(gym.ObservationWrapper):
 
         if self.obs_mode == "visual_statepybullet":
             return np.concatenate([vision_tensor, object_state])
-            
+
+        if self.obs_mode == "joints_statepybullet":
+            return np.concatenate([physics_state, object_state])
+
         # 4. Integrate all! (visual_joints_statepybullet)
         return np.concatenate([vision_tensor, physics_state, object_state])

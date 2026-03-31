@@ -117,7 +117,7 @@ base_env = KukaEnv(render_mode="rgb_array")
 env = MultimodalObservationWrapper(base_env, obs_mode="visual_joints_statepybullet")
 ```
 
-Below are the 6 available `obs_mode` ablations:
+Below are the 7 available `obs_mode` ablations:
 
 1. **`visual_joints_statepybullet`** (Full Multimodal)
    - **Space:** `Box(shape=(542,), float32)`
@@ -132,10 +132,14 @@ Below are the 6 available `obs_mode` ablations:
 4. **`visual_only`**
    - **Space:** `Box(shape=(512,), float32)`
    - **Usage:** Forces agent to solve purely on visual semantics without any numeric physics advantages.
-5. **`pixels`** (CNN Custom Ablation)
+5. **`joints_statepybullet`** (Physics Debugging)
+   - **Space:** `Box(shape=(30,), float32)`
+   - **Structure:** `[0:21]` 21-dim Arm mechanics + `[21:30]` 9-dim Object geometry targets.
+   - **Usage:** Highly recommended for initial Motor Control Debugging. Completely strips 512 visual features for radically faster training.
+6. **`pixels`** (CNN Custom Ablation)
    - **Space:** `gymnasium.spaces.Dict` mapping exactly to raw `Box` matrices.
    - **Usage:** Used primarily for purely-pixel based RL algorithms (e.g. Dreamer) where researchers formulate their own proprietary CNN feature extractor.
-6. **`state`**
+7. **`state`**
    - **Space:** `Box(shape=(21,), float32)`
    - **Usage:** Pure robotic 21-dim proprioception physics state. Classic control. The agent acts entirely blind to visuals.
 
@@ -152,8 +156,8 @@ When training your Actor-Critic algorithms, be very careful about which `obs_mod
 If you feed the RL model the full `visual_joints_statepybullet` array (542-dim), it will suffer from **Modality Dominance**. The agent acts like a lazy student—it will quickly realize it can completely ignore the complex 512-dimension visual CNN block because the exact `[X, Y, Z]` target coordinates are handed to it for free in the `object_state` block at the end of the array. It will zero-out the vision weights entirely.
 
 **Recommended Training Progression:**
-1. **Phase 1 (Motor Control Debugging):** Use `visual_joints_statepybullet` (542-dim). Let the agent "cheat" using the 9-dim object geometry just to prove your PPO reward function and robotic arm mapping work.
-2. **Phase 2 (The Real Task):** Use `visual_joints` (533-dim) or deploy an *Asymmetric Actor-Critic (AAC)*. You must strip out the 9-dim object geometry array for the Actor so it is literally forced to learn spatial geometry strictly from the ResNet's vision output!
+1. **Phase 1 (Motor Control Debugging):** Use `joints_statepybullet` (30-dim). Let the agent "cheat" using the pure 9-dim object geometry without any 512-dim visual parameters. This runs extremely fast and isolates errors down to just your PPO rewards and robotic arm mappings.
+2. **Phase 2 (The Real Task):** Switch to `visual_joints` (533-dim) or deploy an *Asymmetric Actor-Critic (AAC)*. You must completely strip out the 9-dim object geometry array from the Actor's inputs. This literally forces the policy to learn spatial geometry strictly from the ResNet's vision weights!
 
 ---
 
