@@ -1,501 +1,501 @@
-instruction,type,source
-approach the edge while avoiding the green block,avoid,manual
-push the blue ball to the corner,push,manual
-move to the table carefully avoiding all obstacles,avoid,manual
-rest the green sphere on the right side,put,manual
-travel to the far end of the table,move,manual
-go to the table without touching the red block,avoid,generated
-navigate to the table while avoiding the red cube,avoid,generated
-move the arm to the table,move,manual
-push the red block to the right side,push,manual
-reset the arm to home position,reset,manual
-please grab the blue sphere,pick,manual
-place the red cube on the corner,put,generated
-rotate the green block 180 degrees,rotate,manual
-slide the red cube to the right side,push,generated
-go to the shelf without knocking over the blue block,avoid,manual
-go to the shelf without touching the red cube,avoid,generated
-reset the red bottle to start,reset,generated
-grab the red block,pick,generated
-sort the orange objects near the edge,sort,manual
-flip the yellow cube on its side,rotate,manual
-restore the red ball to initial position,reset,generated
-reset the red cylinder to start,reset,generated
-put the red cube on top of the red block,stack,generated
-navigate around the red cube to reach the table,avoid,manual
-slide the red cube to the table,push,generated
-reset the workspace to initial state,reset,manual
-put the red bottle back to start,reset,generated
-where is the small blue block?,find,manual
-go to the left side,move,manual
-arrange the red objects on the center,sort,generated
-reset the red cube to start,reset,generated
-arrange the red objects on the shelf,sort,generated
-flip the red block to the left side,rotate,generated
-put the blue sphere on top of the box,put,manual
-lift the green sphere,pick,manual
-sort the red objects to the center,sort,generated
-rotate the red cylinder 45 degrees,rotate,manual
-slide the red object toward the box,push,manual
-where is the blue cube?,find,manual
-give the blue block a push,push,manual
-move to the center avoiding the red cube,avoid,generated
-nudge the red cube toward the shelf,push,generated
-put the red sphere back to start,reset,generated
-drop the red cube on the right side,put,generated
-get the red block,pick,generated
-nudge the red cube toward the table,push,generated
-pick the red block,pick,manual
-pick up the blue cube on the floor,pick,manual
-turn the green sphere to face right,rotate,manual
-lift the small green sphere,pick,manual
-roll the red ball away from the edge,push,manual
-place the red cube on the right side,put,generated
-head to the left side,move,generated
-turn the blue sphere to face the wall,rotate,manual
-drop the red cube on the shelf,put,generated
-roll the green ball to the corner,push,manual
-navigate to the corner,move,generated
-lift the green ball near the wall,pick,manual
-spot the red cube on the table,find,manual
-shove the red cube to the table,push,generated
-restore the red cylinder to initial position,reset,generated
-stack the yellow block on the green cylinder,stack,manual
-arrange the cubes in order by color,sort,manual
-reset the red sphere to start,reset,generated
-push the red cube to the left side,push,generated
-pick the red ball,pick,generated
-return everything to the starting position,reset,manual
-lift the red cylinder,pick,generated
-spot the red sphere,find,generated
-go to the corner without touching the red cube,avoid,generated
-navigate to the shelf without touching anything,avoid,manual
-group all red spheres together,sort,generated
-put the red cube on top of the red cube,stack,generated
-stack the red cube on the red bottle,stack,generated
-group the spheres together on the table,sort,manual
-organize the spheres on the left and cubes on the right,sort,manual
-stack the blue block on the red cylinder,stack,manual
-shove the red object toward the wall,push,manual
-restore all objects to their original positions,reset,manual
-reset the environment,reset,manual
-lay the blue block flat on the surface,put,manual
-shove the red cube to the left side,push,generated
-put the red cube back to start,reset,generated
-put the blue block on the table please,put,manual
-group all balls together near the center,sort,manual
-shove the red cube to the center,push,generated
-set the red cube on the left side,put,generated
-rotate the orange block 90 degrees clockwise,rotate,manual
-organize the objects by shape,sort,manual
-stack the red cube on the red block,stack,generated
-move to the right side avoiding the red cube,avoid,generated
-put everything back to its original place,reset,manual
-move toward the wall without hitting anything,avoid,manual
-sort all objects by shape into groups,sort,manual
-flip the red cube to the right side,rotate,generated
-group all red bottles together,sort,generated
-shove the red cube to the right side,push,generated
-push the red cube to the table,push,generated
-flip the red block to the table,rotate,generated
-get me the blue object near the edge,pick,manual
-find the red bottle,find,generated
-flip the red cube to the shelf,rotate,generated
-take the blue block on the left,pick,manual
-separate green objects from yellow objects,sort,manual
-arrange the red objects on the right side,sort,generated
-push the green sphere away,push,manual
-group the red objects together,sort,manual
-spot the red cube,find,generated
-sort the red objects to the right side,sort,generated
-approach the left side,move,generated
-go to the center,move,generated
-flip the green cube upside down,rotate,manual
-sort the red objects to the shelf,sort,generated
-pick the red cube,pick,generated
-put the arm back to home,reset,manual
-stack the red cube on the red sphere,stack,generated
-search for the red cylinder,find,generated
-search for the red sphere,find,generated
-move toward the box,move,manual
-take the red ball,pick,generated
-search for the red cube on the floor,find,manual
-put the red cube on the table,put,generated
-sort all cylinders to the right side,sort,manual
-drop the red cube on the table,put,manual
-identify the red block,find,generated
-identify the red cube,find,generated
-spin the red cube to face left,rotate,manual
-search for the blue object,find,manual
-navigate to the table,move,generated
-sort the red objects to the left side,sort,generated
-lift the red block,pick,generated
-go to the far end,move,manual
-reset to starting state,reset,manual
-stack the red block on the yellow sphere,stack,manual
-approach the center,move,generated
-slide the blue sphere forward gently,push,manual
-set the red cube on the shelf,put,generated
-pick up the small blue ball,pick,manual
-pick the large red object,pick,manual
-stack the green block on the blue sphere,stack,manual
-push the green ball toward the edge,push,manual
-recognize the green cube on the left,find,manual
-reset the red block to start,reset,generated
-shove the red cube to the shelf,push,generated
-stack the yellow cube on the red block,stack,manual
-place the orange cube on top of the green block,stack,manual
-get the green cube near the edge,pick,manual
-find the blue object near the corner,find,manual
-put the green cylinder on top of the red sphere,stack,manual
-rotate the red cube counterclockwise,rotate,generated
-retrieve the blue block on the left,pick,manual
-go near the blue object,move,manual
-grab the red cylinder,pick,generated
-grab whichever block is blue,pick,manual
-bring everything back to the beginning,reset,manual
-approach the shelf without disturbing the blue ball,avoid,manual
-take the red ball from the shelf,pick,manual
-look for the red block on the right,find,manual
-turn the blue cube to face right,rotate,manual
-push the red cube away from you,push,manual
-head to the right side,move,manual
-separate the red blocks from the blue blocks,sort,manual
-flip the red cube to the table,rotate,generated
-get the red cube,pick,generated
-turn the red block 90 degrees,rotate,generated
-return the workspace to default,reset,manual
-grab the red cube,pick,generated
-fetch the red sphere from the corner,pick,manual
-reset the scene,reset,manual
-go to the center of the scene,move,manual
-take the red sphere,pick,generated
-deposit the blue cube on the left side,put,manual
-put the red ball back to start,reset,generated
-go to the edge of the table,move,manual
-head toward the right corner,move,manual
-place the red cube on the table,put,generated
-approach the center while avoiding the orange cylinder,avoid,manual
-drop the red cube on the left side,put,generated
-head to the shelf,move,generated
-approach the left corner while avoiding the green ball,avoid,manual
-move to the corner avoiding the red cube,avoid,generated
-put the red cube on the corner,put,generated
-flip the red block upside down,rotate,manual
-stack the red cube on the red cube,stack,generated
-bring the arm back to neutral,reset,manual
-move to the shelf,move,generated
-approach the table without disturbing the red cube,avoid,manual
-push the small green cube aside,push,manual
-where is the large green cube?,find,manual
-place the blue cube in the box,put,manual
-put the red cylinder back to start,reset,generated
-move to the table avoiding the red cube,avoid,generated
-rotate the red cube 90 degrees,rotate,manual
-put the blue cube on top of the red block,stack,manual
-move closer to the wall,move,manual
-spot the red cylinder,find,generated
-approach the shelf,move,generated
-slide the red cube to the shelf,push,generated
-set the red ball on the shelf,put,manual
-go to the right while keeping clear of the sphere,avoid,manual
-go back to the default position,reset,manual
-push the red cube to the right side,push,generated
-locate the red cylinder,find,generated
-put the small blue block on top,put,manual
-set the green sphere down gently,put,manual
-set the red block on the table,put,generated
-search for the red cube,find,generated
-push the blue sphere gently forward,push,manual
-restore the red cube to initial position,reset,generated
-move to the left while avoiding all obstacles,avoid,manual
-stack the red cube on the blue block,stack,manual
-move to the near side,move,manual
-group the green objects on the shelf,sort,manual
-place the red cube on top of the blue sphere,stack,generated
-place the orange sphere on top of the yellow block,stack,manual
-move to the right side without knocking objects over,avoid,manual
-move to the right side avoiding the red block,avoid,generated
-find the red cube,find,generated
-approach the center while avoiding the green sphere,avoid,manual
-find the red sphere,find,generated
-go to the right side without touching the red cube,avoid,generated
-stack the orange block on top of the green sphere,stack,manual
-lift the red sphere,pick,generated
-set the red cube on the corner,put,generated
-head to the center,move,generated
-navigate around the obstacles to reach the left side,avoid,manual
-find the red cylinder,find,generated
-spin the red block around,rotate,generated
-put the red cube on top of the red ball,stack,generated
-shove the red sphere aside,push,manual
-navigate to the left corner,move,manual
-nudge the red cube toward the center,push,generated
-rotate the red block counterclockwise,rotate,generated
-collect the green object near the wall,pick,manual
-navigate to the right corner without touching objects,avoid,manual
-separate the red cylinders from the rest,sort,generated
-arrange the red objects on the corner,sort,generated
-put the blue object down carefully,put,manual
-put the green cube on the left side,put,manual
-set the red cube on the table,put,generated
-move to the table avoiding the red block,avoid,generated
-set the red cube on the right side,put,generated
-flip the red sphere to the left side,rotate,generated
-I need you to lift the green block,pick,manual
-navigate to the left side while avoiding the red cube,avoid,generated
-head to the center carefully,move,manual
-nudge the red cube toward the left side,push,generated
-get the red sphere,pick,generated
-group all small objects to the corner,sort,manual
-place the green block on the right side,put,manual
-bring the arm back to zero position,reset,manual
-place the red cube on top of the blue block,stack,generated
-reset all objects and arm to initial positions,reset,manual
-place the red block on the table,put,generated
-put the red cube on top of the blue block,stack,generated
-rotate the yellow block counterclockwise,rotate,manual
-move to the corner,move,generated
-navigate to the corner while avoiding the red cube,avoid,generated
-go to the corner,move,generated
-flip the red sphere to the table,rotate,generated
-stack the red cube on the red cylinder,stack,generated
-reposition to the center of the workspace,move,manual
-navigate to the center without touching the yellow cube,avoid,manual
-slide the red cube to the corner,push,generated
-navigate to the shelf,move,generated
-find the red ball,find,generated
-flip the red block to the center,rotate,generated
-nudge the red cube toward the corner,push,generated
-spin the orange sphere counterclockwise,rotate,manual
-travel to the right end,move,manual
-put the red cube on the right side,put,generated
-look for the green sphere,find,manual
-identify the red cylinder,find,generated
-sort all red objects to the left side,sort,manual
-stack the red cube on the blue sphere,stack,generated
-go to the left side while avoiding the blue cube,avoid,manual
-navigate to the center while avoiding the red cube,avoid,generated
-navigate to the table while avoiding the red block,avoid,generated
-stack the red cube on the red ball,stack,generated
-go to the table,move,generated
-separate the blue cubes from the green ones,sort,manual
-locate the red cube on the table,find,manual
-flip the blue block to its other side,rotate,manual
-look for the red sphere on the left,find,manual
-move to the left side,move,generated
-turn the orange cube 90 degrees to the right,rotate,manual
-put the red cube on top of the red cylinder,stack,generated
-flip the red block to the corner,rotate,generated
-go to the table without touching the red cube,avoid,generated
-place the red cube on top of the red bottle,stack,generated
-go to the corner while avoiding the yellow block,avoid,manual
-place the red cube on top of the blue cube,stack,generated
-move to the left side avoiding the red block,avoid,generated
-separate the red blocks from the rest,sort,generated
-move toward the center,move,manual
-put the red cube on the left side,put,generated
-separate the large objects from the small ones,sort,manual
-flip the red cube to the center,rotate,generated
-reset the red ball to start,reset,generated
-put the red block back to start,reset,generated
-spin the blue block counterclockwise,rotate,manual
-spot the red block,find,generated
-separate all cubes from all balls,sort,manual
-set the red object down on the right,put,manual
-move to the center,move,generated
-drop the red cube on the corner,put,generated
-place the green block on top of the red ball,stack,manual
-search for the red block,find,generated
-move to where the red block is,move,manual
-go to the left end of the table,move,manual
-sort the blue objects to the table,sort,generated
-locate the red object on the shelf,find,manual
-spin the green sphere around,rotate,manual
-go to the left side without touching the red block,avoid,generated
-head to the table,move,generated
-place the red cube on top of the red ball,stack,generated
-rotate the green cube to the left,rotate,manual
-move the arm to home position,move,manual
-move to the far end without hitting any objects,avoid,manual
-sort the red objects to the table,sort,generated
-move to the right side,move,generated
-put all objects back where they started,reset,manual
-pick the red cylinder,pick,generated
-return to home position,reset,manual
-slide the blue object to the right side,push,manual
-put the red cube on top of the red sphere,stack,generated
-nudge the red cube toward the right side,push,generated
-search for the red ball,find,generated
-place the red cube on the center,put,generated
-navigate to the right side while avoiding the red cube,avoid,generated
-put the blue cube next to the wall,put,manual
-take the green block from the table,pick,manual
-grab the red sphere,pick,generated
-take the red cube,pick,generated
-drop the red object near the wall,put,manual
-go to the shelf,move,generated
-navigate to the left side while avoiding the red block,avoid,generated
-separate the red spheres from the rest,sort,generated
-search for the green block nearby,find,manual
-push the red cube to the corner,push,generated
-slide the blue cube to the right,push,manual
-locate the red ball,find,generated
-return the red sphere to its original position,reset,generated
-move to the left side avoiding the red cube,avoid,generated
-place the red cube on the left side,put,generated
-lift the red ball,pick,generated
-restore the red bottle to initial position,reset,generated
-rotate the red sphere clockwise,rotate,manual
-identify the blue sphere in the scene,find,manual
-place the red cube on top of the red sphere,stack,generated
-pile the green block on top of the blue cube,stack,manual
-spin the red block clockwise,rotate,manual
-get the small red cube,pick,manual
-stack the blue cylinder on the green cube,stack,manual
-spin the red sphere around,rotate,generated
-move to the table,move,manual
-locate the red cube,find,generated
-spin the red cube around,rotate,generated
-can you find the blue cube?,find,manual
-place the green object on the shelf,put,manual
-shove the red cube to the corner,push,generated
-put the red cube on top of the red bottle,stack,generated
-find the green object near the wall,find,manual
-slide the red ball to the left,push,manual
-take the red cylinder,pick,generated
-take the red block,pick,generated
-put the red cylinder on top of the orange cube,stack,manual
-separate the red cubes from the rest,sort,generated
-find the red block,find,manual
-turn the red sphere 90 degrees,rotate,generated
-lift the red cube,pick,generated
-rotate the yellow sphere 45 degrees,rotate,manual
-locate the red block,find,generated
-pile the red sphere on top of the blue block,stack,manual
-place the red cube on top of the red cylinder,stack,generated
-place the green cube to the left,put,manual
-rotate the red cube clockwise,rotate,generated
-navigate to the center,move,generated
-push the large green block forward,push,manual
-approach the right side,move,generated
-approach the table,move,generated
-return the red cube to its original position,reset,generated
-can you pick up the red ball?,pick,manual
-group all red cubes together,sort,generated
-restore the arm to neutral position,reset,manual
-shove the green cube to the left,push,manual
-sort the blocks by color,sort,manual
-lift the red sphere gently,pick,manual
-leave the red block near the edge,put,manual
-grab the red ball,pick,generated
-go to the left side without touching the red cube,avoid,generated
-restore the scene to initial layout,reset,manual
-rotate the yellow cylinder clockwise,rotate,manual
-find the small blue sphere,find,manual
-place the red cube on top of the red block,stack,generated
-flip the red cube to the corner,rotate,generated
-flip the red cube to the left side,rotate,generated
-sort the red objects to the corner,sort,generated
-identify the red sphere,find,generated
-detect the red object near the wall,find,manual
-can you locate the red ball?,find,manual
-put the red cube on top of the blue cube,stack,generated
-reset all blocks to starting layout,reset,manual
-place the green sphere on top of the red cube,stack,manual
-return the red ball to its original position,reset,generated
-restore the red sphere to initial position,reset,generated
-arrange the objects by size,sort,manual
-move to the table without hitting the red block,avoid,manual
-pile the green cube on top of the blue block,stack,manual
-locate the green ball near the edge,find,manual
-set the red block near the edge,put,manual
-get the red ball,pick,generated
-find whichever object is green,find,manual
-turn the blue block to face left,rotate,manual
-place the red cube on the shelf,put,generated
-sort the cylinders away from the spheres,sort,manual
-stack the blue cube on the orange block,stack,manual
-approach the left corner,move,manual
-nudge the red ball toward the wall,push,manual
-navigate to the shelf while avoiding the red cube,avoid,generated
-grab the blue cube,pick,manual
-flip the red block to the right side,rotate,generated
-restore the red block to initial position,reset,generated
-pick the red bottle,pick,generated
-rotate the green cylinder 180 degrees,rotate,manual
-slide the red cube to the left side,push,generated
-scan for the green block nearby,find,manual
-pick the red sphere,pick,generated
-place the red cube on top of the yellow block,stack,manual
-turn the red cube 90 degrees,rotate,generated
-move to the corner avoiding the orange block,avoid,manual
-push the red cube to the shelf,push,generated
-group all red blocks together,sort,generated
-restore the arm to starting position,reset,manual
-shove the green sphere aside,push,manual
-group all red cylinders together,sort,generated
-put the blue sphere on top of the red cube,stack,manual
-identify the red ball,find,generated
-grab the large green block,pick,manual
-arrange all large blocks on the left,sort,manual
-slide the red cube to the center,push,generated
-move to the shelf avoiding the red cube,avoid,generated
-place the green sphere on the blue cube,stack,manual
-put the blue sphere inside the box,put,manual
-arrange the red objects on the table,sort,generated
-return the red cylinder to its original position,reset,generated
-go to the right side,move,generated
-group all blue objects near the wall,sort,manual
-return the red block to its original position,reset,generated
-organize the objects from smallest to largest,sort,manual
-spot the red ball,find,generated
-knock the blue block to the left,push,manual
-go to the shelf while keeping distance from blue objects,avoid,manual
-push the red block forward,push,manual
-return the arm to rest position,reset,manual
-place the green sphere on the floor,put,manual
-rotate the red sphere counterclockwise,rotate,generated
-drop the red cube on the center,put,generated
-return the red bottle to its original position,reset,generated
-put the red cube on the center,put,generated
-drop the red sphere on the left side,put,manual
-give the blue cube a gentle push,push,manual
-get the red cylinder,pick,generated
-separate the red balls from the rest,sort,generated
-locate the red sphere,find,generated
-put the blue block on top of the green sphere,stack,manual
-pick the blue object on the right,pick,manual
-sort the yellow objects to the right side,sort,manual
-put everything back to start,reset,manual
-place the green cube inside the container,put,manual
-place the red cube on top of the red cube,stack,generated
-flip the red block to the shelf,rotate,generated
-put the red cube on the shelf,put,generated
-go to the center without touching the red cube,avoid,generated
-stack the red cube on the blue cube,stack,generated
-flip the blue cylinder horizontally,rotate,manual
-group all red balls together,sort,generated
-put the red ball on top of the blue cylinder,stack,manual
-arrange the blocks in a row by color,sort,manual
-head to the corner,move,generated
-navigate to the left side,move,generated
-put the red block on the table,put,manual
-go to the center carefully avoiding the red sphere,avoid,manual
-push the red block to the table,push,generated
-navigate around the red sphere to the right side,avoid,manual
-push the red cube to the center,push,generated
-go back to the initial configuration,reset,manual
-arrange the red objects on the left side,sort,generated
-can you spot the green sphere?,find,manual
-return all objects to where they were,reset,manual
-approach the table slowly,move,manual
-reset the blue cube to start,reset,generated
-grab the red cube carefully,pick,manual
-set the red cube on the center,put,generated
-nudge the green block a little to the right,push,manual
-reposition yourself to the right side,move,manual
-place the yellow sphere on top of the green cube,stack,manual
-separate the red bottles from the rest,sort,generated
-rotate the red block clockwise,rotate,generated
-navigate to the right side,move,manual
+instruction,type
+elevate the green sphere carefully,lift
+put the blue sphere on top of the box,place
+lift the red sphere off the table,lift
+push the green sphere to the corner,push
+travel to the far end of the table,move
+raise the green cylinder,lift
+lift the red cylinder off the table,lift
+move the arm to the table,move
+place the blue cylinder on the corner,place
+reach for the red box,reach
+please grab the blue sphere,pick
+push the red box to the corner,push
+lower the red cylinder carefully,lower
+set the red cylinder on the right side,place
+hoist the red cylinder up,lift
+lift the blue box off the table,lift
+reach the red sphere on the center,reach
+grab the red box,pick
+slide the blue sphere to the left side,slide
+lower the green box to the surface,lower
+reach for the red sphere,reach
+extend toward the red sphere,reach
+draw the red cylinder toward the left side,pull
+lift the red cylinder up carefully,lift
+put the red cylinder on the table,place
+stretch toward the green sphere nearby,reach
+reach for the blue cylinder,reach
+where is the small blue box?,find
+go to the left side,move
+slide the red box to the left side,slide
+reach for the red cylinder,reach
+slide the red box toward the right side,slide
+lower the red box to the table,lower
+push the blue sphere to the corner,push
+pick the green sphere,pick
+slide the red box toward the table,slide
+bring the red sphere down gently,lower
+drop the red object near the wall,place
+where is the blue cylinder?,find
+set the green sphere down gently,place
+lift the blue cylinder up,lift
+drop the red cylinder on the corner,place
+reach the red box on the table,reach
+push the red cylinder toward the corner,push
+pick the red sphere,pick
+set the red cylinder on the table,place
+pick the red block,pick
+pick up the blue cylinder on the floor,pick
+descend the red sphere carefully,lower
+pick the small green sphere,pick
+put the blue box on the table please,place
+push the red cylinder to the center,push
+move to the right side,move
+lower the blue cylinder to the table,lower
+push the red box toward the center,push
+rest the green sphere on the right side,place
+please head to the left side,move
+pick the green sphere near the wall,pick
+spot the red cylinder on the table,find
+place the red cylinder on the left side,place
+reach the red sphere on the right side,reach
+pull the red box to the left side,pull
+slide the green cylinder toward the center,slide
+extend toward the red box,reach
+put the red cylinder on the left side,place
+take the blue cylinder,pick
+extend toward the blue cylinder,reach
+get the blue sphere,pick
+search for the blue cylinder,find
+raise the blue sphere,lift
+lift the green sphere off the table,lift
+slide the red sphere toward the table,slide
+draw the red cylinder toward the table,pull
+drag the red box to the table,pull
+slide the green box toward the edge,slide
+slide the blue box to the corner,slide
+pull the red sphere toward the corner,pull
+drop the red sphere on the left side,place
+extend the arm toward the green cylinder,reach
+stretch toward the red sphere at the corner,reach
+push the blue box to the left,push
+place the red cylinder on the right side,place
+stretch toward the red cylinder,reach
+push the red sphere away from the edge,push
+slide the red sphere to the left side,slide
+place the red cylinder on the corner,place
+push the red cylinder to the right side,push
+lower the green cylinder to the table,lower
+slide the red sphere to the center,slide
+pull the red cylinder to the table,pull
+lift the red sphere up,lift
+reach the blue cylinder near the corner,reach
+lift the red box off the surface,lift
+slide the red cylinder to the corner,slide
+lower the red cylinder to the right side,lower
+slide the red sphere toward the corner,slide
+place the red cylinder on the center,place
+place the red cylinder on the table,place
+set the red cylinder down on the corner,lower
+get me the blue object near the edge,pick
+locate the green cylinder,find
+descend the red cylinder to the right side,lower
+take the blue box on the left,pick
+slide the blue box to the right side,slide
+slide the red box to the table,slide
+leave the red box near the edge,place
+slide the blue cylinder to the right,slide
+locate the red box,find
+slide the red cylinder toward the corner,slide
+go to the right side,move
+move to the corner,move
+descend the green sphere to the table,lower
+slide the red box toward the left side,slide
+pick the red cylinder,pick
+reach the green cylinder on the left,reach
+pull the red cylinder to the left side,pull
+spot the blue sphere,find
+locate the blue cylinder,find
+move toward the corner,move
+get the blue box,pick
+search for the red cylinder on the table,find
+push the red cylinder toward the table,push
+slide the green sphere toward the wall,slide
+push the red sphere toward the wall,push
+spot the red box,find
+search for the red cylinder,find
+bring the green box down gently,lower
+search for the blue object,find
+navigate to the table,move
+slide the red cylinder toward the right side,slide
+get the red box,pick
+go to the far end,move
+reach for the green box on the right,reach
+drag the red sphere closer to you,pull
+head to the corner,move
+deposit the blue cylinder on the left side,place
+push the red box to the center,push
+pick up the small blue sphere,pick
+pick the large red object,pick
+draw the red cylinder closer,pull
+put the blue sphere on the table,place
+recognize the green cylinder on the left,find
+reach the red cylinder on the left side,reach
+place the red box on the table,place
+draw the red box toward the center,pull
+pull the blue box toward you,pull
+get the green cylinder near the corner,pick
+find the blue object near the corner,find
+draw the green sphere toward you,pull
+set the red cylinder down on the table,lower
+retrieve the blue box on the left,pick
+go near the blue object,move
+grab the blue sphere,pick
+grab whichever box is blue,pick
+reach for the red box at the edge,reach
+hoist the blue sphere off the table,lift
+take the red box from the table,pick
+look for the red box on the right,find
+bring the green cylinder down slowly,lower
+place the green cylinder inside the box,place
+head to the right side,move
+slide the red box to the right side,slide
+lower the red cylinder to the left side,lower
+pick the red box,pick
+lower the red cylinder to the corner,lower
+extend the arm toward the red sphere,reach
+grab the red cylinder,pick
+fetch the red sphere from the corner,pick
+stretch toward the red sphere,reach
+go to the center of the scene,move
+pick the blue cylinder,pick
+push the blue sphere forward gently,push
+reach the red box on the corner,reach
+go to the edge of the table,move
+head toward the right corner,move
+push the red cylinder to the table,push
+raise the blue cylinder carefully,lift
+push the red cylinder toward the right side,push
+please head to the table,move
+raise the green sphere upward,lift
+lift the blue sphere up,lift
+push the red box toward the corner,push
+lower the blue box to the surface,lower
+pull the red cylinder toward you,pull
+reach for the blue box on the left,reach
+please move to the table,move
+hoist the red sphere carefully,lift
+place the green box on the right side,place
+where is the large green cylinder?,find
+push the red box to the right side,push
+reach the red sphere on the left side,reach
+lift the red cylinder up,lift
+lower the red box onto the table,lower
+pull the blue sphere toward the wall,pull
+move closer to the wall,move
+find the green cylinder,find
+please move to the left side,move
+set the red cylinder on the corner,place
+push the green sphere aside,push
+elevate the green box slowly,lift
+extend toward the green box nearby,reach
+put the red cylinder on the right side,place
+locate the blue sphere,find
+push the blue object to the right side,push
+give the blue box a push,push
+push the red sphere toward the left side,push
+spot the red cylinder,find
+place the green sphere on the table,place
+reach the red cylinder on the table,reach
+lift the green box upward,lift
+pull the red box toward you,pull
+move to the near side,move
+slide the blue cylinder to the left side,slide
+pull the red box to the center,pull
+drag the green cylinder toward you,pull
+lift the blue box straight up,lift
+lift the green box off the table,lift
+find the red cylinder,find
+elevate the red sphere,lift
+search for the red sphere,find
+raise the red sphere,lift
+pull the red box toward the left side,pull
+take the red sphere,pick
+push the red sphere to the table,push
+navigate to the corner,move
+lift the green cylinder straight up,lift
+find the blue sphere,find
+descend the red cylinder to the corner,lower
+pull the red cylinder to the center,pull
+put the blue cylinder next to the wall,place
+navigate to the left corner,move
+drop the red cylinder on the center,place
+descend the red cylinder to the center,lower
+collect the green object near the wall,pick
+lift the blue cylinder off the table,lift
+slide the red sphere to the corner,slide
+slide the red box toward the center,slide
+give the blue cylinder a gentle push,push
+push the red box forward,push
+push the red cylinder aside,push
+lift the green cylinder up,lift
+push the red cylinder to the corner,push
+descend the red box to the right side,lower
+I need you to lift the green block,pick
+hoist the red box up,lift
+head to the center carefully,move
+drop the red cylinder on the left side,place
+get the blue cylinder,pick
+slide the green cylinder to the corner,slide
+push the small green cylinder aside,push
+stretch to the blue sphere near the wall,reach
+draw the red box toward the right side,pull
+reach for the red sphere on the table,reach
+push the red sphere to the left side,push
+pull the red box to the right side,pull
+lower the blue sphere to the surface,lower
+please go to the left side,move
+hoist the blue sphere up,lift
+please navigate to the left side,move
+lower the red box to the right side,lower
+drag the red cylinder to the corner,pull
+reposition to the center of the workspace,move
+lift the red cylinder off the surface,lift
+drop the red box on the table,place
+please navigate to the table,move
+spot the blue cylinder,find
+set the red box down on the table,lower
+place the red box on the left side,place
+descend the blue sphere to the table,lower
+travel to the right end,move
+push the red cylinder toward the center,push
+look for the green sphere,find
+search for the blue sphere,find
+slide the green cylinder to the left side,slide
+drag the red box to the center,pull
+raise the blue cylinder,lift
+lift the blue box up,lift
+lift the green cylinder off the table,lift
+drag the red cylinder to the center,pull
+go to the table,move
+slide the green sphere to the center,slide
+locate the red cylinder on the table,find
+lower the red cylinder to the table,lower
+look for the red sphere on the left,find
+navigate to the left side,move
+lower the green box slowly,lower
+pull the red cylinder to the corner,pull
+lower the red box to the left side,lower
+raise the red cylinder,lift
+draw the red box toward the table,pull
+raise the green cylinder off the surface,lift
+draw the red box toward the left side,pull
+hoist the green cylinder up,lift
+slide the red sphere to the table,slide
+move toward the center,move
+push the red cylinder toward the left side,push
+slide the blue sphere toward the edge,slide
+set the red cylinder down on the right side,lower
+reach the red box on the right side,reach
+reach the red cylinder on the center,reach
+lower the blue cylinder carefully,lower
+locate the red sphere,find
+slide the green sphere to the right side,slide
+push the green cylinder to the left,push
+head to the center,move
+push the red sphere toward the table,push
+pull the green box toward the corner,pull
+find the red sphere,find
+move to where the red box is,move
+go to the left end of the table,move
+slide the blue cylinder toward the table,slide
+locate the red object on the table,find
+lower the green sphere to the table,lower
+lift the green box up,lift
+head to the table,move
+draw the red cylinder toward the center,pull
+set the green sphere down carefully,lower
+move the arm to home position,move
+lift the blue box carefully,lift
+slide the red cylinder to the table,slide
+move to the center,move
+reach the green sphere on the table,reach
+pick the blue sphere,pick
+reach the blue cylinder on the table,reach
+put the small blue box on the table,place
+draw the red cylinder toward the right side,pull
+drop the red cylinder on the right side,place
+search for the blue box,find
+push the red box to the table,push
+hoist the red sphere up,lift
+push the red sphere aside,push
+take the green box from the table,pick
+get the red sphere,pick
+take the red cylinder,pick
+push the red object toward the corner,push
+please go to the table,move
+raise the green box,lift
+slide the red sphere toward the left side,slide
+search for the green box nearby,find
+set the red box on the table,place
+put the red box on the table,place
+find the blue box,find
+stretch toward the red box,reach
+raise the red box,lift
+push the red cylinder to the left side,push
+grab the blue box,pick
+stretch toward the blue cylinder,reach
+bring the red box down to the surface,lower
+identify the blue sphere in the scene,find
+drag the red cylinder to the right side,pull
+pull the blue sphere toward the left side,pull
+lower the red box to the surface,lower
+get the small red cylinder,pick
+pull the red cylinder to the right side,pull
+set the red box down on the right side,lower
+move to the table,move
+locate the red cylinder,find
+set the red cylinder down on the left side,lower
+can you find the blue cylinder?,find
+push the green box a little to the right,push
+put the red box on the left side,place
+pull the red box to the table,pull
+find the green object near the wall,find
+set the red box near the edge,place
+take the blue sphere,pick
+take the red box,pick
+drag the green sphere to the left side,pull
+slide the red cylinder to the left side,slide
+find the red box,find
+descend the red box to the left side,lower
+get the red cylinder,pick
+lower the red sphere to the surface,lower
+search for the red box,find
+pull the blue cylinder toward the center,pull
+draw the red cylinder toward the corner,pull
+push the large green box forward,push
+bring the red cylinder down,lower
+go to the corner,move
+place the green cylinder to the left,place
+navigate to the center,move
+move to the left side,move
+extend toward the red cylinder,reach
+can you pick up the red box?,pick
+slide the red cylinder toward the table,slide
+extend the arm to the blue box,reach
+set the red object down on the right,place
+slide the red box to the left,slide
+pick the red sphere gently,pick
+push the green sphere away,push
+pick the blue box,pick
+lift the red box off the table,lift
+reach the red cylinder at the center,reach
+set the red sphere down gently,lower
+find the small blue sphere,find
+drag the red cylinder to the left side,pull
+lower the red cylinder to the center,lower
+descend the red cylinder to the left side,lower
+slide the red box to the center,slide
+find the blue cylinder,find
+detect the red object near the wall,find
+can you locate the red sphere?,find
+drag the red box to the right side,pull
+stretch to the blue sphere on the right,reach
+drag the blue cylinder closer,pull
+reach the red box on the center,reach
+reach the red box on the left side,reach
+slide the red sphere toward the wall,slide
+lift the red box up,lift
+draw the blue cylinder to the center,pull
+locate the green sphere near the edge,find
+push the red sphere to the left,push
+take the blue box,pick
+find whichever object is green,find
+bring the blue cylinder down,lower
+push the red box toward the left side,push
+slide the red box toward the corner,slide
+drag the red sphere toward the wall,pull
+approach the left corner,move
+drop the red cylinder on the table,place
+hoist the blue box up,lift
+grab the blue cylinder,pick
+bring the red box down,lower
+reach the red cylinder on the corner,reach
+grab the green cylinder,pick
+set the blue sphere down carefully,lower
+set the red cylinder on the left side,place
+scan for the green box nearby,find
+grab the red sphere,pick
+drag the blue sphere toward the right side,pull
+descend the red cylinder to the table,lower
+lift the blue sphere off the table,lift
+put the red cylinder on the corner,place
+slide the red box to the corner,slide
+stretch toward the green cylinder on the left,reach
+set the red sphere on the table,place
+slide the red sphere toward the center,slide
+pull the green cylinder toward the center,pull
+locate the blue box,find
+grab the large green box,pick
+slide the red cylinder toward the center,slide
+set the red cylinder on the center,place
+raise the blue box,lift
+draw the green cylinder toward the corner,pull
+push the green sphere toward the edge,push
+slide the red cylinder toward the left side,slide
+reach the red sphere on the table,reach
+go to the center,move
+slide the red cylinder to the right side,slide
+reach the red cylinder on the right side,reach
+slide the blue cylinder toward the corner,slide
+spot the blue box,find
+lay the blue box flat on the surface,place
+raise the blue box upward,lift
+put the green cylinder on the left side,place
+reach the red cylinder near the corner,reach
+push the blue sphere gently forward,push
+set the red box down on the left side,lower
+push the red box to the left side,push
+reach the red sphere on the corner,reach
+push the red box toward the table,push
+push the red object toward the wall,push
+put the blue object down carefully,place
+pick the green cylinder,pick
+slide the red sphere toward the right side,slide
+spot the red sphere,find
+pull the green sphere to the center,pull
+pick the blue object on the right,pick
+slide the blue box toward the wall,slide
+extend toward the red sphere near the wall,reach
+push the red cylinder away from you,push
+drag the red cylinder to the table,pull
+descend the red box to the table,lower
+push the red box toward the right side,push
+hoist the blue cylinder up,lift
+drag the red box to the left side,pull
+bring the blue box down slowly,lower
+slide the red sphere to the right side,slide
+draw the blue box closer to the edge,pull
+slide the green box to the center,slide
+please move to the right side,move
+head to the left side,move
+push the blue cylinder to the right,push
+raise the red sphere up slowly,lift
+set the red box on the left side,place
+lift the green sphere straight up,lift
+put the red cylinder on the center,place
+reach for the green box at the center,reach
+slide the red cylinder to the center,slide
+can you spot the green sphere?,find
+reach for the blue sphere on the table,reach
+approach the table slowly,move
+reach the blue cylinder on the left side,reach
+grab the red cylinder carefully,pick
+push the red box aside,push
+place the green object on the table,place
+reposition yourself to the right side,move
+pull the green box toward the right side,pull
+slide the blue cylinder to the table,slide
+set the red cylinder down on the center,lower
+navigate to the right side,move
