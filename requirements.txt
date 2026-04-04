@@ -5,3 +5,6 @@ torch
 torchvision
 opencv-python
 matplotlib
+stable-baselines3
+tensorboard
+pandas
