@@ -1,16 +1,16 @@
 import os
 import sys
-import gymnasium as gym
+
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import numpy as np
 from stable_baselines3 import PPO
 from stable_baselines3.common.callbacks import CheckpointCallback, EvalCallback
 from stable_baselines3.common.monitor import Monitor
 
-# Ensure the project root is in path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
+from robotics.env.src.environment import KukaEnv        
 from rl.feature_extractor import LanguageConditionedFeatureExtractor
-from robotics.env.src.environment import KukaEnv
 from rl.env_wrapper import LanguageConditionedWrapper
 from rl.reward_shaping import RewardShapingWrapper
 
@@ -84,7 +84,7 @@ def main():
 
     try:
         model.learn(
-            total_timesteps=200_000,
+            total_timesteps=20_000,
             callback=callbacks,
         )
         print("Training complete!")

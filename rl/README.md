@@ -49,3 +49,28 @@ These are now part of the root `requirements.txt`:
 - `tensorboard` — training dashboard
 - `pandas` — loads `nlp_instructions_125.csv` in the wrapper
 
+### Reward Shaping
+
+`reward_shaping.py` implements `RewardShapingWrapper(gym.Wrapper)` sitting on top of the observation wrapper.
+- **Progress bonus:** +2.0 × (reduction in distance between end-effector and target object per step)
+- **Step penalty:** -0.001 per step to encourage the agent to finish tasks quickly rather than stalling
+
+This gives the agent a dense reward signal instead of waiting for a sparse success/fail at the end of the episode.
+
+## Training Status
+
+|            Component                | Status  |
+|-------------------------------------|---------|
+| Language-conditioned policy network | done    |
+| PPO training pipeline               | done    |
+| Reward shaping wrapper              | done    |
+| TensorBoard logging                 | done    |
+| Meaningful reward curve             | blocked |
+| >40% success on any command type    | blocked |
+
+**Blocker:** `KukaEnv._get_observation()` currently returns `object_state = np.zeros(9)` — no target objects are spawned in the scene yet. Until the Robotics team implements multi-object spawning and real object state queries (their Phase 2 milestone), the agent observes identical states regardless of its actions and the reward stays flat at -0.5. Training was run and confirmed working — reward curve is flat due to this blocker, not a code issue.
+
+Once `KukaEnv` exposes real object positions, re-run training with:
+```bash
+c:\python313\python.exe -m rl.train
+```
