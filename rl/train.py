@@ -5,6 +5,7 @@ import numpy as np
 from stable_baselines3 import PPO
 from stable_baselines3.common.callbacks import CheckpointCallback, EvalCallback
 from stable_baselines3.common.monitor import Monitor
+from stable_baselines3.common.vec_env import SubprocVecEnv, DummyVecEnv
 
 # Ensure the project root is in path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -21,14 +22,32 @@ def make_env(render_mode="rgb_array"):
     """Build the full env pipeline: KukaEnv → ObservationWrapper → RewardShaping → Monitor."""
     raw = KukaEnv(render_mode=render_mode)
     obs_wrapped = LanguageConditionedWrapper(raw)
-    shaped = RewardShapingWrapper(obs_wrapped)
+    
+    # Check if reward_shaping is available (since it was just restored/managed internally)
+    try:
+        from rl.reward_shaping import RewardShapingWrapper
+        shaped = RewardShapingWrapper(obs_wrapped)
+    except ImportError:
+        shaped = obs_wrapped
+        print("[Warning] RewardShapingWrapper not found, falling back to unshaped environment.")
+        
     return Monitor(shaped)  # Monitor logs ep_len, ep_rew for TensorBoard
 
 
+def make_vec_env(num_envs=4):
+    """Creates a vectorized environment across multiple CPU cores for faster FPS."""
+    def make_env_fn(rank):
+        def _init():
+            env = make_env()
+            return env
+        return _init
+    return SubprocVecEnv([make_env_fn(i) for i in range(num_envs)])
+
+
 def main():
-    # 1. Create training environment
-    print("[RL Train] Loading PyBullet Kuka Environment...")
-    env = make_env()
+    # 1. Initialize environment using multi-processing to parallelize PyBullet
+    print(f"[RL Train] Loading Multi-Process PyBullet Kuka Environment...")
+    env = make_vec_env(num_envs=4)
 
     # 2. Configure our custom MultiInputPolicy to use our custom Feature Extractor
     policy_kwargs = dict(
@@ -56,43 +75,40 @@ def main():
 
     # 4. Callbacks: periodic checkpoints + automatic evaluation
     os.makedirs("./checkpoints/", exist_ok=True)
+    # 4. Save Checkpoints Periodically
     checkpoint_callback = CheckpointCallback(
-        save_freq=10_000,
+        save_freq=max(5000 // 4, 1), # Adjusted for 4 parallel envs
         save_path='./checkpoints/',
-        name_prefix='saycan_ppo'
+        name_prefix='ppo'
     )
-
-    # Separate eval environment (must NOT share state with training env)
-    eval_env = make_env()
+    
+    # Setup Eval callback
+    eval_env = DummyVecEnv([lambda: make_env()])
     eval_callback = EvalCallback(
         eval_env,
         best_model_save_path='./checkpoints/best/',
         log_path='./logs/eval/',
-        eval_freq=5_000,        # evaluate every 5k training steps
+        eval_freq=max(5000 // 4, 1),
         n_eval_episodes=5,
         deterministic=True,
         render=False,
         verbose=1,
     )
-
     callbacks = [checkpoint_callback, eval_callback]
 
-    # 5. Train
-    print("Starting training. Monitor progress with TensorBoard:")
-    print("  tensorboard --logdir=./logs")
-    print("  http://localhost:6006")
+    # 5. Iteratively Train Strategy (Start the training)
+    print("Starting training layout. You can visualize on Tensorboard:")
+    print("Run `tensorboard --logdir=./logs`")
 
     try:
-        model.learn(
-            total_timesteps=200_000,
-            callback=callbacks,
-        )
-        print("Training complete!")
-        model.save("checkpoints/final_saycan_policy")
-        print("Model saved → checkpoints/final_saycan_policy.zip")
+        # Train with more steps natively
+        model.learn(total_timesteps=50000, callback=callbacks)
+        print("Initial training complete!")
+        model.save("checkpoints/final_ppo_policy")
+        print("Model saved → checkpoints/final_ppo_policy.zip")
     except KeyboardInterrupt:
         print("\nTraining interrupted. Saving checkpoint...")
-        model.save("checkpoints/interrupted_saycan_policy")
+        model.save("checkpoints/interrupted_ppo_policy")
 
 
 if __name__ == "__main__":

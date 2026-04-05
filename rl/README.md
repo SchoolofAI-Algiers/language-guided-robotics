@@ -22,6 +22,14 @@ This two-branch architecture lets each modality learn its own representation bef
 - Dynamically loads `Elbatoul-NLP-W1-instruction-embeddings/embeddings_125.npy` and `.csv` from the NLP Track.
 - Randomizes instructions per episode and aligns real-time simulation output.
 
+### Reward Shaping
+
+`reward_shaping.py` implements a `RewardShapingWrapper(gym.Wrapper)` that adds dense reward on top of the base environment (which returns `reward=0.0`):
+- **Potential-based shaping:** `reward += (prev_dist - curr_dist)` — positive when the end-effector gets closer to a random target.
+- **Time penalty:** `reward -= 0.001` per step — encourages efficient trajectories.
+- **Success bonus:** `reward += 1.0` when the end-effector reaches within 5 cm of the target (episode terminates).
+- Target is re-sampled each episode within the robot's reachable workspace.
+
 
 
 ## How to execute
