@@ -1,0 +1,336 @@
+instruction,type
+pick the blue sphere,pick
+move to the table,move
+put the green box on the corner,place
+drag the yellow sphere to the center,pull
+place the blue sphere on the corner,place
+hoist the red sphere up,lift
+push the green box to the center,push
+push the green box aside,push
+lift the yellow sphere up,lift
+drag the yellow box to the right side,pull
+drop the red cylinder on the left side,place
+grab the blue box,pick
+hoist the green box up,lift
+lower the red sphere to the corner,lower
+push the yellow box toward the center,push
+draw the blue cylinder toward the center,pull
+drop the red sphere on the left side,place
+descend the yellow sphere to the table,lower
+set the yellow sphere on the center,place
+descend the green cylinder to the center,lower
+move to the right side,move
+lift the blue box off the table,lift
+push the blue sphere to the center,push
+descend the red cylinder to the right side,lower
+grab the green cylinder,pick
+push the yellow box to the left side,push
+place the yellow sphere on the right side,place
+go to the left side,move
+push the green box to the right side,push
+move to the corner,move
+drop the red box on the table,place
+raise the green cylinder,lift
+pick the red cylinder,pick
+drag the green cylinder to the corner,pull
+pull the blue sphere toward you,pull
+descend the yellow sphere to the corner,lower
+push the blue box to the table,push
+bring the blue box down,lower
+push the green cylinder aside,push
+pull the green cylinder to the corner,pull
+take the green box,pick
+get the blue cylinder,pick
+push the yellow box toward the right side,push
+move toward the center,move
+set the blue box down on the left side,lower
+pick the red box,pick
+drop the red cylinder on the corner,place
+push the green sphere to the table,push
+get the yellow sphere,pick
+push the yellow cylinder to the right side,push
+descend the green cylinder to the table,lower
+push the green sphere toward the left side,push
+place the red cylinder on the center,place
+push the green sphere toward the table,push
+lift the blue sphere off the table,lift
+grab the yellow sphere,pick
+set the blue cylinder on the left side,place
+approach the table,move
+take the red cylinder,pick
+drop the green sphere on the left side,place
+head to the center,move
+set the yellow cylinder on the right side,place
+bring the yellow cylinder down,lower
+descend the blue sphere to the right side,lower
+navigate to the right side,move
+put the red sphere on the right side,place
+lift the red box up,lift
+place the yellow cylinder on the table,place
+pull the red cylinder to the center,pull
+push the yellow cylinder to the center,push
+lift the green cylinder up,lift
+get the green cylinder,pick
+pick the blue box,pick
+push the red box toward the center,push
+drag the red box to the corner,pull
+hoist the red box up,lift
+lift the yellow sphere off the table,lift
+push the yellow sphere to the table,push
+navigate to the left side,move
+push the red cylinder to the corner,push
+lower the green box to the table,lower
+move to the left side,move
+push the red cylinder toward the center,push
+put the blue cylinder on the left side,place
+lower the blue cylinder to the table,lower
+go to the right side,move
+raise the yellow cylinder,lift
+grab the green sphere,pick
+pull the yellow cylinder to the left side,pull
+lift the blue box up,lift
+push the yellow cylinder toward the center,push
+lift the yellow box off the table,lift
+head to the table,move
+push the blue cylinder toward the corner,push
+set the red sphere on the corner,place
+descend the yellow sphere to the center,lower
+take the red box,pick
+grab the red box,pick
+drag the green sphere to the table,pull
+pull the blue sphere to the right side,pull
+drop the blue box on the center,place
+grab the blue cylinder,pick
+take the green sphere,pick
+lower the blue sphere to the center,lower
+descend the red cylinder to the table,lower
+put the yellow sphere on the center,place
+push the red sphere toward the right side,push
+grab the yellow cylinder,pick
+draw the yellow cylinder toward the table,pull
+drag the blue sphere to the table,pull
+set the red cylinder on the left side,place
+push the blue box aside,push
+get the green sphere,pick
+lift the blue sphere up,lift
+go to the table,move
+lift the red cylinder up,lift
+drag the yellow cylinder to the right side,pull
+set the yellow cylinder down on the center,lower
+head toward the right corner,move
+push the blue cylinder aside,push
+drop the green cylinder on the right side,place
+pull the red cylinder to the table,pull
+take the blue sphere,pick
+pull the red cylinder toward you,pull
+lift the red cylinder off the table,lift
+push the yellow sphere aside,push
+take the blue cylinder,pick
+draw the green sphere toward the right side,pull
+place the blue cylinder on the left side,place
+place the red sphere on the center,place
+pull the yellow sphere toward you,pull
+drop the red box on the center,place
+set the red box on the corner,place
+raise the yellow box,lift
+drop the green cylinder on the corner,place
+grab the blue sphere,pick
+pick the blue cylinder,pick
+raise the red sphere,lift
+set the yellow box on the corner,place
+raise the blue cylinder,lift
+push the blue cylinder toward the center,push
+go to the far end,move
+push the yellow sphere toward the left side,push
+put the yellow cylinder on the right side,place
+hoist the blue sphere up,lift
+push the green cylinder to the corner,push
+hoist the red cylinder up,lift
+set the red box down on the right side,lower
+raise the blue box,lift
+push the yellow box toward the corner,push
+pull the yellow box to the right side,pull
+push the yellow sphere to the center,push
+pull the yellow box to the center,pull
+move toward the corner,move
+get the red box,pick
+lift the green sphere off the table,lift
+draw the blue sphere toward the left side,pull
+lower the green cylinder to the corner,lower
+move to the center,move
+pull the red box to the table,pull
+drag the yellow sphere to the left side,pull
+navigate to the center,move
+bring the yellow sphere down,lower
+lower the yellow box to the right side,lower
+lower the red box to the left side,lower
+push the blue cylinder to the center,push
+lower the yellow cylinder to the table,lower
+set the red sphere down on the left side,lower
+push the red box toward the left side,push
+raise the green box,lift
+pick the red sphere,pick
+go to the center,move
+drag the yellow sphere to the corner,pull
+lift the green box off the table,lift
+approach the left corner,move
+hoist the green cylinder up,lift
+descend the blue cylinder to the left side,lower
+move to where the red box is,move
+set the green sphere on the corner,place
+get the red sphere,pick
+place the red sphere on the right side,place
+raise the blue sphere,lift
+head to the right side,move
+draw the yellow box toward the table,pull
+lower the green sphere to the table,lower
+move to the right end,move
+push the red box toward the right side,push
+pull the green sphere to the center,pull
+pick the green box,pick
+lower the green box to the corner,lower
+put the yellow box on the left side,place
+set the blue cylinder down on the corner,lower
+put the green box on the right side,place
+push the red sphere toward the corner,push
+place the blue sphere on the table,place
+push the blue sphere to the table,push
+pick the yellow box,pick
+take the red sphere,pick
+get the blue box,pick
+push the green cylinder to the left side,push
+push the green cylinder toward the center,push
+set the blue box down on the table,lower
+go to the left end of the table,move
+draw the blue box toward the right side,pull
+drop the blue box on the left side,place
+drop the green cylinder on the table,place
+lift the red sphere off the table,lift
+push the red cylinder toward the left side,push
+draw the yellow sphere toward the left side,pull
+navigate to the left corner,move
+take the yellow box,pick
+set the blue box on the corner,place
+raise the green sphere,lift
+pull the red sphere toward you,pull
+move the arm to the table,move
+grab the green box,pick
+lower the blue cylinder to the corner,lower
+push the yellow box toward the table,push
+raise the red box,lift
+hoist the yellow cylinder up,lift
+get the red cylinder,pick
+set the red sphere down on the center,lower
+bring the blue sphere down,lower
+set the green cylinder down on the table,lower
+head to the corner,move
+pull the yellow sphere to the corner,pull
+set the blue box down on the right side,lower
+drag the red sphere to the table,pull
+drag the red cylinder to the right side,pull
+navigate to the table,move
+push the red box to the left side,push
+drop the red sphere on the table,place
+get the green box,pick
+draw the blue cylinder toward the left side,pull
+place the green cylinder on the left side,place
+push the blue sphere aside,push
+take the blue box,pick
+lift the blue cylinder off the table,lift
+hoist the yellow sphere up,lift
+pick the green sphere,pick
+descend the yellow cylinder to the left side,lower
+pull the blue sphere to the corner,pull
+descend the green sphere to the table,lower
+pick the yellow cylinder,pick
+set the blue sphere down on the center,lower
+drag the green box to the right side,pull
+pull the yellow box toward you,pull
+get the yellow cylinder,pick
+move to the wall,move
+take the yellow sphere,pick
+lift the yellow cylinder up,lift
+push the blue sphere toward the left side,push
+lower the red cylinder to the right side,lower
+descend the blue box to the table,lower
+raise the red cylinder,lift
+push the green sphere to the left side,push
+drop the blue sphere on the table,place
+go to the right corner,move
+go near the blue object,move
+pick the yellow sphere,pick
+put the green cylinder on the right side,place
+grab the red sphere,pick
+push the yellow cylinder to the table,push
+grab the red cylinder,pick
+lower the yellow box to the left side,lower
+lift the blue cylinder up,lift
+draw the green cylinder toward the corner,pull
+set the blue box down on the center,lower
+draw the red box toward the left side,pull
+draw the blue cylinder toward the table,pull
+pull the green box to the center,pull
+lower the blue box to the right side,lower
+hoist the blue cylinder up,lift
+set the yellow cylinder down on the left side,lower
+set the green sphere down on the right side,lower
+lift the green box up,lift
+drag the green cylinder to the right side,pull
+push the blue box to the right side,push
+take the yellow cylinder,pick
+pull the blue cylinder to the corner,pull
+pull the red box toward you,pull
+lift the yellow cylinder off the table,lift
+head to the left side,move
+place the green box on the center,place
+take the green cylinder,pick
+grab the blue box on the left,pick
+put the red cylinder on the table,place
+pull the yellow cylinder to the table,pull
+get the yellow box,pick
+lift the green cylinder off the table,lift
+put the blue sphere on the center,place
+put the green sphere on the center,place
+lift the green sphere up,lift
+raise the yellow sphere,lift
+get the blue sphere,pick
+drop the red sphere on the corner,place
+hoist the blue box up,lift
+push the blue box to the corner,push
+lower the blue box to the table,lower
+move to the center of the table,move
+lower the yellow box to the corner,lower
+lift the yellow box up,lift
+set the red sphere on the center,place
+put the blue cylinder on the center,place
+push the green cylinder to the table,push
+draw the yellow cylinder toward the center,pull
+lower the red box to the right side,lower
+pull the blue box to the right side,pull
+push the blue cylinder toward the table,push
+put the red box on the right side,place
+take the red box from the table,pick
+drag the green cylinder to the center,pull
+hoist the yellow box up,lift
+pick the green cylinder,pick
+descend the blue box to the right side,lower
+push the red sphere to the table,push
+lift the red box off the table,lift
+draw the blue cylinder toward the corner,pull
+lower the red box to the center,lower
+lift the red sphere up,lift
+set the blue sphere down on the right side,lower
+push the yellow cylinder toward the corner,push
+go to the edge of the table,move
+push the blue box toward the center,push
+place the yellow box on the right side,place
+put the red box on the center,place
+draw the red cylinder toward the corner,pull
+move the arm to home position,move
+set the red box down on the left side,lower
+grab the yellow box,pick
+pull the blue box to the left side,pull
+put the red box on the table,place
+go to the corner,move
+hoist the green sphere up,lift
+navigate to the corner,move
