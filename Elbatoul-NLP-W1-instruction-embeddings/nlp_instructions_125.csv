@@ -1,0 +1,126 @@
+instruction,type
+pick the red block,pick
+grab the blue cube,pick
+lift the green sphere,pick
+take the red ball from the shelf,pick
+get the small red cube,pick
+retrieve the blue block on the left,pick
+collect the green object near the wall,pick
+fetch the red sphere from the corner,pick
+can you pick up the red ball?,pick
+please grab the blue sphere,pick
+I need you to lift the green block,pick
+pick up the blue cube on the floor,pick
+take the green block from the table,pick
+grab the large green block,pick
+lift the red sphere gently,pick
+get me the blue object near the edge,pick
+grab whichever block is blue,pick
+pick the large red object,pick
+lift the green ball near the wall,pick
+take the blue block on the left,pick
+grab the red cube carefully,pick
+pick the blue object on the right,pick
+lift the small green sphere,pick
+get the green cube near the edge,pick
+pick up the small blue ball,pick
+push the red block forward,push
+slide the blue cube to the right,push
+shove the green sphere aside,push
+nudge the red ball toward the wall,push
+knock the blue block to the left,push
+roll the green ball to the corner,push
+push the green sphere away,push
+slide the blue sphere forward gently,push
+give the blue cube a gentle push,push
+shove the red sphere aside,push
+push the red cube away from you,push
+slide the red ball to the left,push
+push the large green block forward,push
+give the blue block a push,push
+shove the green cube to the left,push
+slide the blue object to the right side,push
+push the green ball toward the edge,push
+push the small green cube aside,push
+push the red block to the right side,push
+shove the red object toward the wall,push
+slide the red object toward the box,push
+nudge the green block a little to the right,push
+roll the red ball away from the edge,push
+push the blue ball to the corner,push
+push the blue sphere gently forward,push
+move to the table,move
+go to the left side,move
+navigate to the right side,move
+head to the center carefully,move
+travel to the far end of the table,move
+approach the left corner,move
+reposition yourself to the right side,move
+move the arm to home position,move
+go to the center of the scene,move
+move closer to the wall,move
+head to the right side,move
+navigate to the left corner,move
+move toward the center,move
+go to the far end,move
+head toward the right corner,move
+move to where the red block is,move
+go near the blue object,move
+move toward the box,move
+go to the edge of the table,move
+move to the near side,move
+go to the left end of the table,move
+approach the table slowly,move
+travel to the right end,move
+reposition to the center of the workspace,move
+move the arm to the table,move
+put the green cube on the left side,put
+put the red block on the table,put
+set the red ball on the shelf,put
+drop the red cube on the table,put
+lay the blue block flat on the surface,put
+rest the green sphere on the right side,put
+leave the red block near the edge,put
+deposit the blue cube on the left side,put
+put the blue object down carefully,put
+put the blue cube next to the wall,put
+place the green cube inside the container,put
+set the red block near the edge,put
+place the green cube to the left,put
+set the green sphere down gently,put
+set the red object down on the right,put
+put the small blue block on top,put
+put the blue sphere inside the box,put
+place the green block on the right side,put
+place the blue cube in the box,put
+drop the red sphere on the left side,put
+drop the red object near the wall,put
+place the green object on the shelf,put
+put the blue block on the table please,put
+put the blue sphere on top of the box,put
+place the green sphere on the floor,put
+find the red block,find
+locate the green ball near the edge,find
+look for the green sphere,find
+search for the blue object,find
+spot the red cube on the table,find
+scan for the green block nearby,find
+identify the blue sphere in the scene,find
+detect the red object near the wall,find
+recognize the green cube on the left,find
+where is the blue cube?,find
+where is the large green cube?,find
+where is the small blue block?,find
+can you locate the red ball?,find
+can you find the blue cube?,find
+can you spot the green sphere?,find
+find the green object near the wall,find
+find the small blue sphere,find
+find whichever object is green,find
+look for the red block on the right,find
+look for the red sphere on the left,find
+search for the red cube on the floor,find
+search for the green block nearby,find
+find the blue object near the corner,find
+locate the red cube on the table,find
+locate the red object on the shelf,find

@@ -7,11 +7,11 @@ import numpy as np
 class GraphicalMode(Enum):
     GUI = p.GUI # for graphical version
     DIRECT = p.DIRECT # for non-graphical version
-    
+
 class RenderMode(Enum):
     HUMAN = "human"
     RGB_ARRAY = "rgb_array"
-    
+
 # environment
 NUM_JOINTS = 7
 END_EFFECTOR_LINK_INDEX = 6
