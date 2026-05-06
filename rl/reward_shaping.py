@@ -40,13 +40,11 @@ class RewardShapingWrapper(gym.Wrapper):
     def reset(self, **kwargs):
         obs, info = self.env.reset(**kwargs)
 
-        # Sample a random target within the (slightly tighter) workspace bounds
-        self._target_pos = self.np_random.uniform(
-            low=self._ws_low, high=self._ws_high
-        ).astype(np.float32)
+        # Use the real target object position from the environment
+        self._target_pos = obs['object_state'][:3].copy()
 
-        # Initialise potential from the starting end-effector position
-        ee_pos = np.asarray(info.get("ee_position", [0.0, 0.0, 0.0]), dtype=np.float32)
+        # Initialise potential from pos
+        ee_pos = obs['state'][14:17].astype(np.float32)
         self._prev_dist = float(np.linalg.norm(ee_pos - self._target_pos))
 
         info["target_pos"] = self._target_pos.tolist()
@@ -56,8 +54,8 @@ class RewardShapingWrapper(gym.Wrapper):
     def step(self, action):
         obs, _reward, terminated, truncated, info = self.env.step(action)
 
-        # Retrieve current end-effector position from info
-        ee_pos = np.asarray(info.get("ee_position", [0.0, 0.0, 0.0]), dtype=np.float32)
+        # Retrieve current end-effector position from obs
+        ee_pos = obs['state'][14:17].astype(np.float32)
         curr_dist = float(np.linalg.norm(ee_pos - self._target_pos))
 
         # Potential-based shaping: positive when getting closer

@@ -21,17 +21,9 @@ from rl.reward_shaping import RewardShapingWrapper
 def make_env(render_mode="rgb_array"):
     """Build the full env pipeline: KukaEnv → ObservationWrapper → RewardShaping → Monitor."""
     raw = KukaEnv(render_mode=render_mode)
-    obs_wrapped = LanguageConditionedWrapper(raw)
-    
-    # Check if reward_shaping is available (since it was just restored/managed internally)
-    try:
-        from rl.reward_shaping import RewardShapingWrapper
-        shaped = RewardShapingWrapper(obs_wrapped)
-    except ImportError:
-        shaped = obs_wrapped
-        print("[Warning] RewardShapingWrapper not found, falling back to unshaped environment.")
-        
-    return Monitor(shaped)  # Monitor logs ep_len, ep_rew for TensorBoard
+    shaped = RewardShapingWrapper(raw)
+    obs_wrapped = LanguageConditionedWrapper(shaped)
+    return Monitor(obs_wrapped)
 
 
 def make_vec_env(num_envs=4):

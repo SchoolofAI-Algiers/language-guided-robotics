@@ -23,7 +23,7 @@ class LanguageConditionedWrapper(gym.ObservationWrapper):
     Transforms raw PyBullet dicts `{"pixels", "state", "object_state"}` into 
     the RL-required shape `{"vision": (521,), "nlp": (384,)}`.
     
-    Dynamically loads NLP datasets (embeddings_125.npy and nlp_instructions_125.csv).
+    Dynamically loads NLP datasets (embeddings.npy and nlp_instructions.csv).
     """
 
     def __init__(self, env):
@@ -36,7 +36,7 @@ class LanguageConditionedWrapper(gym.ObservationWrapper):
         })
 
         self.nlp_base_path = os.path.abspath(os.path.join(
-            os.path.dirname(__file__), '..', 'Elbatoul-NLP-W1-instruction-embeddings'
+            os.path.dirname(__file__), '..', 'nlp'
         ))
         
         # Load NLP Embeddings Matrix and metadata
@@ -44,10 +44,11 @@ class LanguageConditionedWrapper(gym.ObservationWrapper):
         
         self.current_instruction_idx = 0
         self.current_embedding = np.zeros(384, dtype=np.float32)
+        self.physics_dropout_rate = 0.30
 
     def _load_nlp_dataset(self):
-        npy_path = os.path.join(self.nlp_base_path, 'embeddings_125.npy')
-        csv_path = os.path.join(self.nlp_base_path, 'nlp_instructions_125.csv')
+        npy_path = os.path.join(self.nlp_base_path, 'embeddings.npy')
+        csv_path = os.path.join(self.nlp_base_path, 'nlp_instructions.csv')
         
         if os.path.exists(npy_path) and os.path.exists(csv_path):
             self.embeddings = np.load(npy_path).astype(np.float32)
@@ -69,6 +70,7 @@ class LanguageConditionedWrapper(gym.ObservationWrapper):
         # Sample a random language conditioning target from the loaded embeddings
         self.current_instruction_idx = np.random.randint(0, self.num_instructions)
         self.current_embedding = self.embeddings[self.current_instruction_idx]
+        self._dropout_physics = np.random.random() < self.physics_dropout_rate
         
         if hasattr(self, 'instructions_df'):
             inst_text = self.instructions_df.iloc[self.current_instruction_idx]['instruction']
@@ -103,6 +105,9 @@ class LanguageConditionedWrapper(gym.ObservationWrapper):
                 object_state
             ], axis=0).astype(np.float32)
 
+        if getattr(self, '_dropout_physics', False):
+            vision_tensor[512:521] = 0.0
+            
         return {
             'vision': vision_tensor,
             'nlp': self.current_embedding

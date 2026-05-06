@@ -46,3 +46,23 @@ CAM_TARGET = [0, 0, 0.5]
 RENDER_FPS = 30
 RENDER_WIDTH = 640
 RENDER_HEIGHT = 480
+
+# ── Multi-object scene (Phase 2) ──────────────────────────────
+NUM_OBJECTS = 4
+
+OBJECT_COLORS = {
+    "red":    [1.0, 0.0, 0.0, 1.0],
+    "green":  [0.0, 1.0, 0.0, 1.0],
+    "blue":   [0.0, 0.0, 1.0, 1.0],
+    "yellow": [1.0, 1.0, 0.0, 1.0],
+}
+OBJECT_SHAPES = ["box", "sphere", "cylinder"]
+
+OBJECT_SIZE_MIN = 0.02   
+OBJECT_SIZE_MAX = 0.05   
+
+TABLE_POSITION     = [0.5, 0.0, 0.2]
+TABLE_HALF_EXTENTS = [0.4, 0.4, 0.05]
+TABLE_SURFACE_Z    = 0.42
+SPAWN_RANGE        = 0.22
+GRASP_DISTANCE = 0.15
