@@ -6,3 +6,5 @@ __pycache__/
 *.log
 .env
 .ipynb_checkpoints/
+logs/*
+checkpoints/*

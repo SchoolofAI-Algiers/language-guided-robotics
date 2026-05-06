@@ -245,10 +245,10 @@ class KukaEnv(gym.Env):
                 physicsClientId=self._physics_client_id,
             )
             dist = np.linalg.norm(ee_pos - np.array(obj_pos))
-            print(f"  dist to obj {obj_id}: {dist:.4f}m")  # debug
+            #print(f"  dist to obj {obj_id}: {dist:.4f}m")  # debug
 
             if dist < GRASP_DISTANCE:
-                print(f"✅ SNAPPING obj {obj_id}!")
+                #print(f"✅ SNAPPING obj {obj_id}!")
                 self._grasp_constraint = p.createConstraint(
                     self._kuka_id,
                     END_EFFECTOR_LINK_INDEX,
