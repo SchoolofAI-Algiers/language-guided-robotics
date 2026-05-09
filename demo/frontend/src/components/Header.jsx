@@ -19,11 +19,7 @@ export default function Header({ phase, systemStatus }) {
         borderRight: 'var(--border)',
         minWidth: 220,
       }}>
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-          <rect x="1" y="1" width="20" height="20" stroke="#0A0A0A" strokeWidth="1.5" />
-          <path d="M6 11 L11 6 L16 11 L11 16 Z" fill="#FF4400" />
-          <circle cx="11" cy="11" r="2" fill="#0A0A0A" />
-        </svg>
+        <img src="../public/Logo_SOAI.png" alt="SOAI Labs" style={{ width: 32, height: 32 }} />
         <div>
           <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 13, letterSpacing: '0.1em', lineHeight: 1 }}>SOAI LABS</div>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: 9, color: 'var(--gray-text)', letterSpacing: '0.1em' }}>2026 Edition</div>
@@ -47,16 +43,7 @@ export default function Header({ phase, systemStatus }) {
         }}>
           Language-Guided Robotics
         </span>
-        <span style={{
-          marginLeft: 16,
-          fontFamily: 'var(--font-mono)',
-          fontSize: 10,
-          color: 'var(--orange)',
-          border: '1px solid var(--orange)',
-          padding: '2px 8px',
-        }}>
-          PHASE {phase}
-        </span>
+        
       </div>
 
       {/* Status indicators */}

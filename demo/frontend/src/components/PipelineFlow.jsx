@@ -73,9 +73,10 @@ function StageBox({ stage, status, result, isLast }) {
             )}
             {stage.key === 'cv' && (
               <>
-                <div>OBJ: <span style={{ color: 'var(--black)', fontWeight: 600 }}>{result.targetObject?.label}</span></div>
-                <div>DEPTH: {result.depthEstimate}m</div>
-                <div>FEAT: [{result.featureVector?.slice(0, 3).join(', ')}...]</div>
+                <div>VISIBLE: <span style={{ color: 'var(--black)', fontWeight: 600 }}>{result.n_visible ?? result.detectedObjects?.length ?? 0} objects</span></div>
+                <div>MODEL: {result.model || 'ResNet18'}</div>
+                <div>FEAT: {result.feature_dim || 512}-dim per object</div>
+                {result.error && <div style={{ color: '#ef4444' }}>ERR: {result.error}</div>}
               </>
             )}
             {stage.key === 'rl' && (
@@ -141,7 +142,7 @@ function StatusBadge({ status }) {
   );
 }
 
-export default function PipelineFlow({ stages }) {
+export default function PipelineFlow({ stages, onNewScene }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
 
@@ -157,6 +158,21 @@ export default function PipelineFlow({ stages }) {
           <div className="label" style={{ marginBottom: 2 }}>Pipeline</div>
           <div className="display-md" style={{ fontSize: 16 }}>Inference Flow</div>
         </div>
+        <button
+            onClick={onNewScene}
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: 9,
+              color: 'var(--black)',
+              border: '1px solid var(--black)',
+              padding: '3px 8px',
+              background: 'transparent',
+              cursor: 'pointer',
+              marginLeft: 8,
+            }}
+          >
+            ↺ NEW SCENE
+          </button>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: 9, color: 'var(--gray-text)' }}>
           NLP · CV · RL · ACTION
         </div>

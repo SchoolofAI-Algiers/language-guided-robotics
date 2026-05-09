@@ -201,7 +201,7 @@ function PyBulletStreamView({ jointAngles, pose, isRunning }) {
 
       <TopLeftHUD
         line1="PyBullet LIVE — 7-DOF KUKA IIWA"
-        line2="PHASE 2 · REAL STREAM · WAVE POLICY"
+        line2="REAL STREAM · Full Pipeline"
       />
 
       <JointHUD jointAngles={jointAngles} />

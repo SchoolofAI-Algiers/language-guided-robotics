@@ -5,48 +5,32 @@ const MODULES = [
   {
     key: 'robotics',
     label: 'Robotics',
-    track: 'M1=–M2',
+    track: 'Kamel Brouthen, Ikram Chouider, Takoua Hidoussi',
     status: 'active',
     items: ['PyBullet env', '7-DOF wrapper', 'Gymnasium API', 'IK utilities'],
-    phase: 'W1–2',
-    completion: 35,
   },
   {
     key: 'vision',
     label: 'Vision / ML',
-    track: 'M3–M4',
+    track: 'Maria, ibtissem',
     status: 'active',
     items: ['CNN extractor', 'Object detection', 'Depth localization', 'Dataset pipeline'],
-    phase: 'W3–4',
-    completion: 20,
   },
   {
     key: 'nlp',
     label: 'NLP',
-    track: 'M5–M6',
+    track: 'Amel Messaoud, Elbatoul Bechiri, Sarah Abaziz',
     status: 'active',
     items: ['sentence-transformers', 'Instruction dataset', 'Embedding cache', 'Similarity tests'],
-    phase: 'W5–6',
-    completion: 25,
   },
   {
     key: 'rl',
     label: 'RL',
-    track: 'M7–M8',
-    status: 'pending',
-    items: ['PPO loop', 'Reward shaping', 'Curriculum', 'Eval scripts'],
-    phase: 'W5–6',
-    completion: 10,
-  },
-  {
-    key: 'demo',
-    label: 'Demo / Systems',
-    track: 'M9–M10',
+    track: 'Chouaib karballa, Amina Medabis',
     status: 'active',
-    items: ['Flask backend', 'React frontend', 'Video stream', 'Logging'],
-    phase: 'W1–2',
-    completion: 40,
+    items: ['PPO loop', 'Reward shaping', 'Curriculum', 'Eval scripts'],
   },
+  
 ];
 
 function ModuleCard({ mod }) {
@@ -138,7 +122,7 @@ export default function ModuleStatus() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <div style={{
-        padding: '12px 20px',
+        padding: '22px 20px',
         borderBottom: 'var(--border)',
         display: 'flex',
         justifyContent: 'space-between',

@@ -2,13 +2,19 @@
 import React, { useState } from 'react';
 import { EXAMPLE_COMMANDS } from '../lib/simulator.js';
 
-export default function InstructionPanel({ onSubmit, isRunning }) {
+export default function InstructionPanel({ onSubmit, isRunning, onNewScene }) {
   const [instruction, setInstruction] = useState('');
 
   const handleSubmit = () => {
     if (!instruction.trim() || isRunning) return;
     onSubmit(instruction.trim());
     setInstruction('');
+  };
+
+  const handleNewScene = async () => {
+    if (onNewScene) {
+      await onNewScene();
+    }
   };
 
   const handleKey = (e) => {
@@ -36,14 +42,14 @@ export default function InstructionPanel({ onSubmit, isRunning }) {
         <div style={{
           fontFamily: 'var(--font-mono)',
           fontSize: 9,
-          color: 'var(--orange)',
-          border: '1px solid var(--orange)',
+          color: 'var(--gray-text)',
+          border: '1px solid var(--gray-light)',
           padding: '3px 8px',
-        }}>NLP ▸ all-MiniLM-L6-v2</div>
+        }}>NLP ▸ STUB</div>
       </div>
 
       {/* Text area */}
-      <div style={{ padding: '16px 20px', borderBottom: 'var(--border)', flex: 1 }}>
+      <div style={{ padding: '10px 10px', borderBottom: 'var(--border)', flex: 1 }}>
         <textarea
           value={instruction}
           onChange={(e) => setInstruction(e.target.value)}
@@ -52,7 +58,7 @@ export default function InstructionPanel({ onSubmit, isRunning }) {
           disabled={isRunning}
           style={{
             width: '100%',
-            minHeight: 80,
+            minHeight: 50,
             background: 'var(--gray-bg)',
             border: '1.5px solid var(--black)',
             padding: '12px 14px',
@@ -108,6 +114,8 @@ export default function InstructionPanel({ onSubmit, isRunning }) {
           ))}
         </div>
       </div>
+
+      
 
       <style>{`
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
