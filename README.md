@@ -8,7 +8,7 @@
 
 ## Abstract
 
-This project presents a robotic manipulation system that combines natural language understanding with visual perception to execute instruction-driven tasks. We trained three distinct policy architectures, ResNet18 baseline, SigLIP vision foundation model, and Spatial Fusion (4-channel ResNet18)—on a 7-DOF KUKA IIWA robot in PyBullet simulation. This document details our training methodology, architectural decisions, encountered challenges, and recommendations for future work.
+This project presents a robotic manipulation system that combines natural language understanding with visual perception to execute instruction-driven tasks. We trained three distinct policy architectures, ResNet18 baseline, SigLIP vision foundation model, and Spatial Fusion (4-channel ResNet18) on a 7-DOF KUKA IIWA robot in PyBullet simulation. This document details our training methodology, architectural decisions, encountered challenges, and recommendations for future work.
 
 ---
 
