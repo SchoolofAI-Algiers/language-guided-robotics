@@ -132,24 +132,15 @@ We systematically evaluated three approaches to multi-modal policy learning:
 - 4 parallel environments (SubprocVecEnv)
 - LayerNorm-based architecture matching training setup
 
-**Performance**: **Best inference speed** + **highest task success**
+**Performance**: Selected for efficient architecture and practical deployment
 
 **Architectural Justification**:
 - Spatial information at input layer → learned at all CNN depths
 - No external model dependency
-- Efficient (ResNet18 is lightweight, ~1-2ms inference)
+- Lightweight ResNet18 backbone
 - Interpretable feature hierarchy
 - 4-channel input naturally encodes object segmentation
-
-**Comparison**:
-| Metric | Alpha | Gamma | Beta |
-|--------|-------|-------|------|
-| Inference latency | 3ms | 100ms | 1-2ms |
-| REACH success | 60% | 65% | 92% |
-| PICK success | 15% | 20% | 87% |
-| Training steps | 100K | 300K | 600K |
-| Model size | 45MB | 280MB | 5MB |
-| **Selected** | ❌ | ❌ | ✅ |
+- **Selected for production** pending empirical validation
 
 ---
 
@@ -327,14 +318,12 @@ total_steps = 600_000
 └─────────────────────────────────────────┘
 ```
 
-### 7.3 Training Results
+### 7.3 Training Status
 
-- **Total training time**: ~3 hours (Kaggle T4 GPU)
-- **Final performance**:
-  - REACH success rate: 92%
-  - PICK success rate: 87%
-  - Mean episode reward: +8.5
-- **Model size**: 5.0 MB (compressed checkpoint)
+- **Setup**: 600K steps configured (2-phase curriculum)
+- **Infrastructure**: Kaggle T4 GPU environment
+- **Checkpoint**: Model exported and validated for deployment
+- **Status**: Ready for empirical testing and validation
 
 ---
 
@@ -472,15 +461,14 @@ Result: Left/right oscillation with no purpose
 
 ## 10. Testing & Validation
 
-### 10.1 Post-Fix Performance
+### 10.1 Testing Framework
 
-| Task | Test Cases | Success Rate | Notes |
-|------|-----------|--------------|-------|
-| REACH (red box) | 10 | 100% | Consistent approach to target |
-| REACH (green sphere) | 10 | 90% | One failure: object knocked offline table |
-| PICK (yellow box) | 8 | 87.5% | Gripper engages, constraint created |
-| PICK (blue sphere) | 8 | 75% | Slippery object, loses grip at height |
-| LIFT (red sphere) | 5 | 60% | Requires vertical control + grasp coordination |
+Prepared test suite covering:
+- REACH tasks: Approach to target objects
+- PICK tasks: Gripper engagement and constraint creation
+- LIFT tasks: Vertical displacement with grasp maintenance
+
+Tests pending execution and quantitative validation.
 
 ### 10.2 Example Execution Log
 
@@ -589,8 +577,7 @@ Workspace:
 
 **Inference**:
 - GPU: Any (CUDA preferred)
-- Latency: 5-10ms per step
-- Throughput: 100+ instructions/minute
+- Framework: Stable-Baselines3 with PyTorch
 
 ---
 
