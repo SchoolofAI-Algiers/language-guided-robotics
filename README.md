@@ -38,28 +38,17 @@ We systematized the problem by:
 
 ```mermaid
 graph TB
-    subgraph "Perception"
-        A["PyBullet Simulator<br/>4 Objects × 7 DOF"]
-        B["Vision Pipeline<br/>4-Channel ResNet18<br/>RGB + Instance Mask"]
-        C["NLP Pipeline<br/>all-MiniLM-L6-v2<br/>384-dim embeddings"]
-    end
-    
-    subgraph "Policy"
-        D["Observation<br/>vision: 521-dim<br/>nlp: 384-dim"]
-        E["PPO Policy<br/>MultiInputPolicy<br/>LayerNorm Architecture"]
-        F["Action Output<br/>7 joint angles<br/>+ gripper command"]
-    end
-    
-    subgraph "Execution"
-        G["Gripper Control<br/>7-Stage Safety<br/>Constraint-based"]
-        H["Joint Control<br/>Position targets<br/>300N per joint"]
-        I["Simulation Step<br/>240Hz physics<br/>4 steps/action"]
-    end
-    
-    subgraph "Learning"
-        J["Reward Shaping<br/>Task-specific signals<br/>Multi-task curriculum"]
-        K["Environment State<br/>object_state, ee_pos<br/>grasped_object_id"]
-    end
+    A["PyBullet Simulator<br/>4 Objects × 7 DOF"]
+    B["Vision Pipeline<br/>4-Channel ResNet18"]
+    C["NLP Pipeline<br/>all-MiniLM-L6-v2"]
+    D["Observation"]
+    E["PPO Policy<br/>LayerNorm Architecture"]
+    F["Action Output<br/>7 joints + gripper"]
+    G["Gripper Control<br/>7-Stage Safety"]
+    H["Joint Control"]
+    I["Simulation Step<br/>240Hz physics"]
+    J["Reward Shaping<br/>Task-specific"]
+    K["Environment State"]
     
     A --> B
     A --> C
@@ -75,13 +64,6 @@ graph TB
     K --> J
     J --> E
     I --> A
-
-    style A fill:#e3f2fd,color:#000
-    style B fill:#bbdefb,color:#000
-    style C fill:#bbdefb,color:#000
-    style E fill:#fff9c4,color:#000
-    style G fill:#ffccbc,color:#000
-    style J fill:#c8e6c9,color:#000
 ```
 
 ---
