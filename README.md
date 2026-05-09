@@ -76,12 +76,12 @@ graph TB
     J --> E
     I --> A
 
-    style A fill:#e3f2fd
-    style B fill:#bbdefb
-    style C fill:#bbdefb
-    style E fill:#fff9c4
-    style G fill:#ffccbc
-    style J fill:#c8e6c9
+    style A fill:#e3f2fd,color:#000
+    style B fill:#bbdefb,color:#000
+    style C fill:#bbdefb,color:#000
+    style E fill:#fff9c4,color:#000
+    style G fill:#ffccbc,color:#000
+    style J fill:#c8e6c9,color:#000
 ```
 
 ---
@@ -519,7 +519,7 @@ Step 37:  Episode terminated → success=True
 
 ## 11. Future Work
 
-### 11.1 Short-term (1-2 weeks)
+### 11.1 Short-term
 
 1. **Task type detection refinement**
    - Use instruction embedding similarity
@@ -533,7 +533,7 @@ Step 37:  Episode terminated → success=True
    - Train sub-policies: "grasp", "place", "push"
    - Combine via high-level planner
 
-### 11.2 Medium-term (1-2 months)
+### 11.2 Medium-term
 
 4. **Real-world sim-to-real transfer**
    - Domain randomization (textures, lighting, physics)
@@ -543,7 +543,7 @@ Step 37:  Episode terminated → success=True
    - Two-armed system
    - Language: "robot A, reach the box. Robot B, push it."
 
-### 11.3 Long-term (3-6 months)
+### 11.3 Long-term
 
 6. **Hierarchical task planning**
    - Break complex instructions into subtasks
@@ -622,4 +622,4 @@ Workspace:
 
 ---
 
-**For questions or feedback, please open an issue or contact the research team.**
+**For questions or feedback, please open an issue or contact the team.**
