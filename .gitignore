@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.pkl
+*.pt
+*.pth
+*.log
+.env
+.ipynb_checkpoints/
+node_modules/
+
+# environment
+.venv/
+language_guided_robotics.egg-info/
+uv.lock
