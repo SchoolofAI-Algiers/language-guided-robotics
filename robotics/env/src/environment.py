@@ -304,6 +304,7 @@ class KukaEnv(gym.Env):
             "step_count": self._step_count,
             "ee_position": observation[14:17].tolist(),
             "object_state": self._get_object_state(),
+            "grasped_object": self._grasped_object_id,
             "grasped_object_id": self._grasped_object_id,
             "is_success": is_success,
         }
