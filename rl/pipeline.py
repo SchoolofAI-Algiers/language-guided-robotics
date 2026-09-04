@@ -111,7 +111,9 @@ def run_episode(instruction_text: str, max_steps: int = 500) -> dict:
 
     # Critical fix (issue #7 / Finding 2): without this call, RewardShapingWrapper's
     # _task_type never leaves its default "reach", regardless of instruction verb.
-    _bg_env.set_instruction(instruction_text)
+    # Embedding is passed so set_instruction() can use the trained SVM classifier
+    # for instructions that don't exactly match the known 340-instruction dataset.
+    _bg_env.set_instruction(instruction_text, embedding=embedding)
     print(f"[Pipeline] task_type: {_bg_env._task_type}")
 
     target_colour    = _parse_colour(instruction_text)
