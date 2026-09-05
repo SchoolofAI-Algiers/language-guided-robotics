@@ -90,11 +90,14 @@ def _parse_colour(text: str) -> str:
 
 def _parse_command(text: str) -> str:
     t = text.lower()
-    if any(w in t for w in ['pick', 'grab', 'take', 'get']): return 'pick'
+    if any(w in t for w in ['pick', 'grab', 'take', 'get', 'grasp']): return 'pick'
+    if any(w in t for w in ['lift', 'raise', 'hoist']): return 'lift'
+    if any(w in t for w in ['lower', 'descend', 'down']): return 'lower'
     if any(w in t for w in ['place', 'put', 'drop', 'set']): return 'place'
     if 'push' in t:  return 'push'
-    if 'reach' in t: return 'reach'
-    return 'reach'
+    if any(w in t for w in ['pull', 'drag', 'draw']): return 'pull'
+    if any(w in t for w in ['approach', 'go to', 'go near', 'head to', 'head toward', 'navigate', 'move']): return 'move'
+    return 'move'
 
 
 def run_episode(instruction_text: str, max_steps: int = 500) -> dict:
@@ -105,6 +108,13 @@ def run_episode(instruction_text: str, max_steps: int = 500) -> dict:
 
     embedding, matched = find_best_embedding(instruction_text)
     print(f"[Pipeline] Matched: {matched}")
+
+    # Critical fix (issue #7 / Finding 2): without this call, RewardShapingWrapper's
+    # _task_type never leaves its default "reach", regardless of instruction verb.
+    # Embedding is passed so set_instruction() can use the trained SVM classifier
+    # for instructions that don't exactly match the known 340-instruction dataset.
+    _bg_env.set_instruction(instruction_text, embedding=embedding)
+    print(f"[Pipeline] task_type: {_bg_env._task_type}")
 
     target_colour    = _parse_colour(instruction_text)
     frames           = []
