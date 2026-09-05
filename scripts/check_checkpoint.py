@@ -12,13 +12,13 @@ without needing to load the model onto a GPU or re-create the
 training environment.
 
 """
- 
 import sys
 from pathlib import Path
- 
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 from stable_baselines3.common.save_util import load_from_zip_file
- 
- 
+
 def check_checkpoint(zip_path: str) -> None:
     path = Path(zip_path)
     print(f"=== {path.name} ===")
