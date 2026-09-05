@@ -96,8 +96,8 @@ def _parse_command(text: str) -> str:
     if any(w in t for w in ['place', 'put', 'drop', 'set']): return 'place'
     if 'push' in t:  return 'push'
     if any(w in t for w in ['pull', 'drag', 'draw']): return 'pull'
-    if 'reach' in t: return 'reach'
-    return 'reach'
+    if any(w in t for w in ['approach', 'go to', 'go near', 'head to', 'head toward', 'navigate', 'move']): return 'move'
+    return 'move'
 
 
 def run_episode(instruction_text: str, max_steps: int = 500) -> dict:
