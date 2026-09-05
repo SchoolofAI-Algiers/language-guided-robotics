@@ -14,10 +14,9 @@ from rl.reward_shaping import RewardShapingWrapper
 from rl.beta_feature_extractor import BetaFeatureExtractor
 
 _BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-_SF_DIR   = os.path.join(_BASE_DIR, "spacial fusion")
-_CKPT_ZIP = os.path.join(_SF_DIR, "beta_policy.zip")
-_NLP_NPY  = os.path.join(_SF_DIR, "embeddings.npy")
-_NLP_CSV  = os.path.join(_SF_DIR, "nlp_instructions.csv")
+_CKPT_ZIP = os.path.join(_BASE_DIR, "..", "checkpoints", "paper-v1", "beta_final_600k.zip")
+_NLP_NPY  = os.path.join(_BASE_DIR, "spacial fusion", "embeddings.npy")
+_NLP_CSV  = os.path.join(_BASE_DIR, "spacial fusion", "nlp_instructions.csv")
 
 _model        = None
 _bg_env       = None
