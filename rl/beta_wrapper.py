@@ -6,12 +6,13 @@ from gymnasium import spaces
 import pybullet as p
 
 from rl.beta_vision import beta_features, DEVICE
+from rl.common.wrapper import KukaWrapper
 
 _BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 _NLP_DIR  = os.path.join(_BASE_DIR, "spacial fusion")
 
 
-class BetaLanguageConditionedWrapper(gym.ObservationWrapper):
+class BetaLanguageConditionedWrapper(KukaWrapper, gym.ObservationWrapper):
     """
     Strategy Beta wrapper — matches training exactly.
     Stack: KukaEnv -> BetaLanguageConditionedWrapper -> RewardShapingWrapper
@@ -22,6 +23,7 @@ class BetaLanguageConditionedWrapper(gym.ObservationWrapper):
 
     def __init__(self, env):
         super().__init__(env)
+        self._init_common()  # sets up inference_mode, target tracking, instruction tracking
 
         self.observation_space = spaces.Dict({
             "vision": spaces.Box(low=-np.inf, high=np.inf, shape=(521,), dtype=np.float32),
@@ -45,14 +47,14 @@ class BetaLanguageConditionedWrapper(gym.ObservationWrapper):
         self._use_physics_dropout = True
         self._dropout_rate = 0.30
         self._dropout_active = False
-        self._inference_mode = False  # Disable dropout during inference
 
     def reset(self, **kwargs):
         obs, info = self.env.reset(**kwargs)
         idx = np.random.randint(0, self.num_instructions)
         self.current_embedding = self.embeddings[idx]
         if self.instructions_df is not None:
-            info["current_instruction"] = self.instructions_df.iloc[idx]["instruction"]
+            instruction_text = self.instructions_df.iloc[idx]["instruction"]
+            info["current_instruction"] = instruction_text
         self._dropout_active = self._use_physics_dropout and (np.random.random() < self._dropout_rate)
         return self.observation(obs, info), info
 
@@ -71,7 +73,7 @@ class BetaLanguageConditionedWrapper(gym.ObservationWrapper):
         vis_feat_np = vis_feat.cpu().numpy()
 
         physics = np.zeros(9, dtype=np.float32)
-        # Skip physics dropout during inference
+        # Skip physics dropout during inference (now driven by the shared inference_mode flag)
         if info and (not self._dropout_active or self._inference_mode):
             obj_state = info.get("object_state", {})
             if obj_state:
@@ -95,11 +97,11 @@ class BetaLanguageConditionedWrapper(gym.ObservationWrapper):
     @property
     def _object_ids(self):
         return self.env._object_ids
-    
+
     @property
     def _object_colors(self):
         return self.env._object_colors
-    
+
     @property
     def _object_shapes(self):
         return self.env._object_shapes
