@@ -112,7 +112,7 @@ class KukaEnv(gym.Env):
                 if not too_close:
                     break
 
-            position = [candidate[0], candidate[1], TABLE_SURFACE_Z]
+            position = [candidate[0], candidate[1], TABLE_SURFACE_Z + size]
             placed_positions.append(candidate)
 
             obj_id = p.createMultiBody(baseMass=0.1, baseCollisionShapeIndex=col,
