@@ -22,6 +22,18 @@ JOINT_UPPER_LIMITS = np.array([2.9671,  2.0944,  2.9671,  2.0944,  2.9671,  2.09
 HOME_POSITION = np.zeros(7, dtype=np.float32)
 MAX_JOINT_VELOCITY = 10.0
 
+# Per-env-step joint motion cap, in radians. Previously nothing capped how
+# far a joint's position target could move in a single env.step() call, so
+# a policy or IK-driven controller could command a large jump and let
+# POSITION_CONTROL + MAX_FORCE close that gap at high velocity within the
+# SIM_STEPS_PER_ACTION substeps. On contact with an object, that high
+# closing velocity produced large corrective impulses from the physics
+# solver -- especially bad on off-center geometry (e.g. cylinder edges),
+# where the impulse converts into large angular velocity and the object
+# gets launched instead of pushed/slid. See: arm contact launches light
+# objects instead of sliding them (issue tracked separately).
+MAX_JOINT_STEP_RADIANS = 0.02
+
 WORKSPACE_LOW  = np.array([-1.5, -1.5, 0.0], dtype=np.float32)
 WORKSPACE_HIGH = np.array([1.5,  1.5,  1.5], dtype=np.float32)
 

@@ -8,7 +8,7 @@ from robotics.env.src.config import (
     GraphicalMode, NUM_JOINTS, END_EFFECTOR_LINK_INDEX, MAX_FORCE,
     SIM_TIMESTEP, SIM_STEPS_PER_ACTION, MAX_EPISODE_STEPS,
     JOINT_LOWER_LIMITS, JOINT_UPPER_LIMITS, HOME_POSITION,
-    MAX_JOINT_VELOCITY, WORKSPACE_LOW, WORKSPACE_HIGH,
+    MAX_JOINT_VELOCITY, MAX_JOINT_STEP_RADIANS, WORKSPACE_LOW, WORKSPACE_HIGH,
     CAM_DISTANCE, CAM_YAW, CAM_PITCH, CAM_TARGET,
     RENDER_WIDTH, RENDER_HEIGHT, RENDER_FPS, RenderMode,
     NUM_OBJECTS, OBJECT_COLORS, OBJECT_SIZE_MIN, OBJECT_SIZE_MAX,
@@ -112,7 +112,7 @@ class KukaEnv(gym.Env):
                 if not too_close:
                     break
 
-            position = [candidate[0], candidate[1], TABLE_SURFACE_Z]
+            position = [candidate[0], candidate[1], TABLE_SURFACE_Z + size]
             placed_positions.append(candidate)
 
             obj_id = p.createMultiBody(baseMass=0.1, baseCollisionShapeIndex=col,
@@ -277,10 +277,23 @@ class KukaEnv(gym.Env):
         half_range = (JOINT_UPPER_LIMITS - JOINT_LOWER_LIMITS) / 2.0
         joint_actions = midpoint + action[:NUM_JOINTS] * half_range
 
+        # Cap per-step joint motion. Without this, POSITION_CONTROL +
+        # MAX_FORCE can close a large position error within
+        # SIM_STEPS_PER_ACTION substeps, producing high end-effector
+        # velocity on contact and large corrective impulses from the
+        # physics solver (see MAX_JOINT_STEP_RADIANS docstring in config.py).
+        current_joint_positions = np.array([
+            p.getJointState(self._kuka_id, i, physicsClientId=self._physics_client_id)[0]
+            for i in range(NUM_JOINTS)
+        ])
+        delta = np.clip(joint_actions - current_joint_positions,
+                         -MAX_JOINT_STEP_RADIANS, MAX_JOINT_STEP_RADIANS)
+        capped_joint_actions = current_joint_positions + delta
+
         for i in range(NUM_JOINTS):
             p.setJointMotorControl2(bodyUniqueId=self._kuka_id, jointIndex=i,
                                     controlMode=p.POSITION_CONTROL,
-                                    targetPosition=float(joint_actions[i]),
+                                    targetPosition=float(capped_joint_actions[i]),
                                     force=MAX_FORCE,
                                     physicsClientId=self._physics_client_id)
 
